@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedPreOrder - Каталог препаратов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>MedPreOrder</h1>
+                        <p>Аптека с доставкой</p>
+                    </div>
+                </a>
+                
+                <!-- Навигация -->
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="catalog.html" class="active"><i class="fas fa-pills"></i> Каталог</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Корзина</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Счетчик корзины -->
+                <div class="cart-header">
+                    <button class="cart-toggle" onclick="window.location.href='cart.html'">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <section class="catalog-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-pills"></i>
+                    Каталог препаратов
+                </h2>
+                
+                <div class="filters">
+                    <button class="filter-btn active" onclick="window.filterProducts('all')">Все</button>
+                    <button class="filter-btn" onclick="window.filterProducts('Обезболивающие')">Обезболивающие</button>
+                    <button class="filter-btn" onclick="window.filterProducts('Антибиотики')">Антибиотики</button>
+                    <button class="filter-btn" onclick="window.filterProducts('Антигистаминные')">От аллергии</button>
+                    <button class="filter-btn" onclick="window.filterProducts('Сердечно-сосудистые')">Для сердца</button>
+                    <button class="filter-btn" onclick="window.filterProducts('Жаропонижающие')">Жаропонижающие</button>
+                    <button class="filter-btn" onclick="window.filterProducts('Желудочно-кишечные')">Для ЖКТ</button>
+                </div>
+            </div>
+            
+            <!-- Сетка товаров -->
+            <div id="products-grid" class="products-grid">
+                <!-- Товары будут добавлены динамически -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MedPreOrder</h3>
+                    <p>Ваше здоровье — наша забота. Современная аптека с доставкой по всему городу.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>8-800-123-45-67</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Круглосуточно, без выходных</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Полезные ссылки</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог товаров</a></li>
+                        <li><a href="cart.html">Корзина</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 MedPreOrder. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключаем общий JS -->
+  <script src="data.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Инициализация каталога при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница каталога загружена');
+            // Ничего не вызываем здесь - всё делает initializePage() в script.js
+        });
+    </script>
+</body>
+</html>

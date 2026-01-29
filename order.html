@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа - MedPreOrder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>MedPreOrder</h1>
+                        <p>Аптека с доставкой</p>
+                    </div>
+                </a>
+                
+                <!-- Навигация -->
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="catalog.html"><i class="fas fa-pills"></i> Каталог</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Корзина</a></li>
+                        <li><a href="order.html" class="active"><i class="fas fa-clipboard-check"></i> Оформление</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Корзина -->
+                <div class="cart-header">
+                    <button class="cart-toggle" onclick="window.location.href='cart.html'">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <div class="order-page">
+            <h1 class="page-title">
+                <i class="fas fa-clipboard-check"></i>
+                Оформление заказа
+            </h1>
+            
+            <div class="order-layout">
+                <!-- Левая колонка - сводка заказа -->
+                <div class="order-summary-column">
+                    <div class="order-summary-card">
+                        <h2><i class="fas fa-receipt"></i> Сводка заказа</h2>
+                        
+                        <div id="orderItems" class="order-items-list">
+                            <!-- Товары будут добавлены через JS -->
+                        </div>
+                        
+                        <div class="order-totals">
+                            <div class="total-row">
+                                <span>Товары:</span>
+                                <span id="itemsTotal">0 ₽</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Доставка:</span>
+                                <span id="deliveryCost">0 ₽</span>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>Итого:</span>
+                                <span id="totalAmount">0 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-contacts" style="margin-top: 20px;">
+                        <h3><i class="fas fa-phone"></i> Контактная информация</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-phone-alt"></i> 8-800-123-45-67</p>
+                            <p><i class="fas fa-clock"></i> Круглосуточно, без выходных</p>
+                            <p><i class="fas fa-map-marker-alt"></i> г. Тула, ул. Медицинская, д. 15</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка - форма -->
+                <div class="order-form-column">
+                    <div class="order-form-card">
+                        <h2><i class="fas fa-user-circle"></i> Контактная информация</h2>
+                        
+                        <form id="orderForm">
+                            <div class="form-group">
+                                <label for="fullName">ФИО *</label>
+                                <input type="text" id="fullName" required placeholder="Иванов Иван Иванович" value="Иванов Иван Иванович">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Телефон *</label>
+                                <input type="tel" id="phone" required placeholder="+7 (999) 123-45-67" value="+7 (999) 123-45-67">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required placeholder="ivanov@example.com" value="ivanov@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Способ получения *</label>
+                                <div class="delivery-options">
+                                    <div class="delivery-option">
+                                        <input type="radio" id="pickup" name="deliveryMethod" value="pickup" checked>
+                                        <label for="pickup">
+                                            <div class="option-header">
+                                                <i class="fas fa-store"></i>
+                                                <div class="option-title">Самовывоз из аптеки</div>
+                                            </div>
+                                            <div class="option-description">Бесплатно. Обычно готов через 1-2 часа</div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="delivery-option">
+                                        <input type="radio" id="delivery" name="deliveryMethod" value="delivery">
+                                        <label for="delivery">
+                                            <div class="option-header">
+                                                <i class="fas fa-truck"></i>
+                                                <div class="option-title">Доставка курьером</div>
+                                            </div>
+                                            <div class="option-description">300 ₽. Доставка в течение дня</div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" id="pharmacyGroup">
+                                <label for="pharmacy">Аптека получения</label>
+                                <select id="pharmacy">
+                                    <option value="ул. Центральная, 10">ул. Центральная, 10</option>
+                                    <option value="ул. Лесная, 25">ул. Лесная, 25</option>
+                                    <option value="пр. Мира, 15">пр. Мира, 15</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="comment">Комментарий к заказу</label>
+                                <textarea id="comment" rows="3" placeholder="Особые пожелания, время доставки и т.д.">Особые пожелания, время доставки и т.д.</textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-order-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Подтвердить заказ
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MedPreOrder</h3>
+                    <p>Ваше здоровье — наша забота. Современная аптека с доставкой по всему городу.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>8-800-123-45-67</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@medpreorder.ru</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>г. Москва, ул. Медицинская, д. 15</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Круглосуточно, без выходных</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Полезные ссылки</h3>
+                    <ul>
+                        <li><a href="catalog.html">Каталог товаров</a></li>
+                        <li><a href="index.html#delivery">Условия доставки</a></li>
+                        <li><a href="index.html#about">О компании</a></li>
+                        <li><a href="#">Консультация фармацевта</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 MedPreOrder. Все права защищены. Лицензия № ЛО-77-01-012345 от 12.01.2023</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключаем общий JS -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedPreOrder - Аптека с доставкой</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>MedPreOrder</h1>
+                        <p>Аптека с доставкой</p>
+                    </div>
+                </a>
+                
+                <!-- Навигация -->
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="catalog.html"><i class="fas fa-pills"></i> Каталог</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> О нас</a></li>
+                        <li><a href="#delivery"><i class="fas fa-shipping-fast"></i> Доставка</a></li>
+                        <li><a href="#contacts"><i class="fas fa-address-book"></i> Контакты</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Корзина -->
+                <div class="cart-header">
+                    <button class="cart-toggle" onclick="window.location.href='cart.html'">
+                        <i class="fas fa-shopping-cart"></i>
+                        Корзина
+                        <span id="cart-count" class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Баннер -->
+        <section class="hero">
+            <h2>Здоровье с доставкой на дом</h2>
+            <p>Широкий ассортимент лекарственных препаратов, медицинских товаров и средств личной гигиены. Быстрая доставка по городу. Консультация профессиональных фармацевтов.</p>
+            <a href="catalog.html" class="cta-button">Перейти в каталог</a>
+        </section>
+
+        <!-- Преимущества -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Гарантия качества</h3>
+                <p>Все препараты сертифицированы и хранятся в соответствии с требованиями</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <h3>Быстрая доставка</h3>
+                <p>Доставка в течение 2-х часов по городу. Курьерская служба 24/7</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Консультации</h3>
+                <p>Бесплатные консультации профессиональных фармацевтов</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Безопасная оплата</h3>
+                <p>Оплата онлайн или при получении. Гарантия безопасности платежей</p>
+            </div>
+        </div>
+
+        <!-- Популярные товары (мини-каталог) -->
+        <section id="popular" class="catalog-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-fire"></i>
+                    Популярные товары
+                </h2>
+                <a href="catalog.html" class="cta-button" style="padding: 10px 20px; font-size: 14px;">
+                    Весь каталог <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div id="popular-products" class="products-grid">
+                <!-- Популярные товары будут добавлены динамически -->
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section id="about" class="catalog-section">
+            <h2 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                О нашей аптеке
+            </h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
+                <div>
+                    <p style="font-size: 16px; line-height: 1.8; color: #555;">
+                        <strong>MedPreOrder</strong> — это современная интернет-аптека, которая объединяет традиционные ценности фармацевтики и передовые технологии. 
+                        Мы работаем на рынке с 2010 года и за это время заслужили доверие тысяч клиентов.
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.8; color: #555; margin-top: 20px;">
+                        Наш ассортимент включает более 5000 наименований лекарственных препаратов, медицинских изделий, витаминов и средств личной гигиены. 
+                        Все товары хранятся в надлежащих условиях, что гарантирует их качество и эффективность.
+                    </p>
+                </div>
+                <div>
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 30px; color: white;">
+                        <h3 style="margin-bottom: 20px; font-size: 24px;">Наши преимущества</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Лицензированная аптека</span>
+                            </li>
+                            <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Собственная служба доставки</span>
+                            </li>
+                            <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Профессиональные фармацевты</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Гарантия возврата средств</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Доставка -->
+        <section id="delivery" class="catalog-section">
+            <h2 class="section-title">
+                <i class="fas fa-shipping-fast"></i>
+                Условия доставки
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 30px;">
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 15px;">
+                        <i class="fas fa-car"></i> Доставка по городу
+                    </h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <i class="fas fa-bolt" style="color: #4CAF50; position: absolute; left: 0;"></i>
+                            <strong>Доставка за 2 часа</strong> — 299 ₽
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <i class="fas fa-clock" style="color: #2196F3; position: absolute; left: 0;"></i>
+                            <strong>Доставка в течение дня</strong> — 199 ₽
+                        </li>
+                        <li style="padding-left: 20px; position: relative;">
+                            <i class="fas fa-gift" style="color: #9C27B0; position: absolute; left: 0;"></i>
+                            <strong>Бесплатно</strong> от 3000 ₽
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 15px;">
+                        <i class="fas fa-store"></i> Самовывоз
+                    </h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <i class="fas fa-map-marker-alt" style="color: #ff9800; position: absolute; left: 0;"></i>
+                            15 аптек-партнеров по всему городу
+                        </li>
+                        <li style="padding-left: 20px; position: relative;">
+                            <i class="fas fa-clock" style="color: #ff9800; position: absolute; left: 0;"></i>
+                            Круглосуточный самовывоз из центральной аптеки
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 15px;">
+                        <i class="fas fa-credit-card"></i> Способы оплаты
+                    </h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <i class="fas fa-credit-card" style="color: #9C27B0; position: absolute; left: 0;"></i>
+                            Банковской картой онлайн
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <i class="fas fa-money-bill-wave" style="color: #9C27B0; position: absolute; left: 0;"></i>
+                            Наличными курьеру
+                        </li>
+                        <li style="padding-left: 20px; position: relative;">
+                            <i class="fas fa-mobile-alt" style="color: #9C27B0; position: absolute; left: 0;"></i>
+                            Переводом через СБП
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Как сделать заказ -->
+        <section id="how-to-order" class="catalog-section">
+            <h2 class="section-title">
+                <i class="fas fa-shopping-basket"></i>
+                Как сделать заказ
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div style="text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 24px; font-weight: bold;">1</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Выберите товары</h3>
+                    <p style="color: #666;">Перейдите в каталог и добавьте нужные препараты в корзину</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 24px; font-weight: bold;">2</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Оформите заказ</h3>
+                    <p style="color: #666;">Заполните форму заказа и выберите способ доставки</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 24px; font-weight: bold;">3</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Оплатите</h3>
+                    <p style="color: #666;">Выберите удобный способ оплаты онлайн или при получении</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 24px; font-weight: bold;">4</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Получите заказ</h3>
+                    <p style="color: #666;">Дождитесь доставки или заберите заказ в аптеке</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MedPreOrder</h3>
+                    <p>Ваше здоровье — наша забота. Современная аптека с доставкой по всему городу.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>8-800-123-45-67</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@medpreorder.ru</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>г. Тула, ул. Медицинская, д. 15</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Круглосуточно, без выходных</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Полезные ссылки</h3>
+                    <ul>
+                        <li><a href="catalog.html">Каталог товаров</a></li>
+                        <li><a href="#delivery">Условия доставки</a></li>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#">Консультация фармацевта</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 MedPreOrder. Все права защищены. Лицензия № ЛО-77-01-012345 от 12.01.2023</p>
+            </div>
+        </div>
+    </footer>
+
+   <!-- Подключаем общий JS -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Показываем популярные товары на главной
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Главная страница загружена');
+            
+            // НЕ вызываем initializeCart - он вызывается автоматически из script.js
+            
+            // Показываем 4 популярных товара на главной
+            const popularProductsContainer = document.getElementById('popular-products');
+            if (popularProductsContainer && window.products) {
+                // Берем первые 4 товара как популярные
+                const popularProducts = window.products.slice(0, 4);
+                
+                popularProductsContainer.innerHTML = popularProducts.map(product => {
+                    const cartItem = window.cart ? window.cart.find(item => item.productId === product.id) : null;
+                    const inCartCount = cartItem ? cartItem.quantity : 0;
+                    
+                    return `
+                    <div class="product-card" data-product-id="${product.id}">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                            ${product.prescription ? '<span class="prescription">Рецептурный</span>' : ''}
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-meta">
+                                <span class="product-category">${product.category}</span>
+                            </div>
+                            <div class="product-price">${product.price} ₽</div>
+                        </div>
+                        <div class="product-actions">
+                            ${inCartCount > 0 ? `
+                                <div class="quantity-controls">
+                                    <button class="qty-btn minus" onclick="window.updateCartItemQuantity(${product.id}, ${inCartCount - 1})">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span class="qty-display">${inCartCount} в корзине</span>
+                                    <button class="qty-btn plus" onclick="window.updateCartItemQuantity(${product.id}, ${inCartCount + 1})">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            ` : `
+                                <button class="add-to-cart-btn" onclick="window.addToCart(${product.id}, 1)" ${!product.inStock ? 'disabled' : ''}>
+                                    <i class="fas fa-cart-plus"></i>
+                                    ${!product.inStock ? 'Нет в наличии' : 'В корзину'}
+                                </button>
+                            `}
+                            <button class="view-details-btn" onclick="window.showProductDetails(${product.id})">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </button>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            }
+        });
+    </script>
+</body>
+</html>
