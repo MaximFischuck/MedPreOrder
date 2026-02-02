@@ -753,3 +753,40 @@
         margin: 0;
     }
 }
+@media (max-width: 768px) {
+    .about-section {
+        display: block !important;
+    }
+    
+    .about-section .container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .about-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .about-text {
+        width: 100% !important;
+        order: 2;
+        margin-top: 30px;
+    }
+    
+    .features-sidebar {
+        width: 100% !important;
+        order: 1;
+        margin-bottom: 30px;
+    }
+    
+    .feature-list {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+    
+    .feature-card {
+        text-align: center;
+        padding: 20px;
+    }
+}
