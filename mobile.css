@@ -529,6 +529,54 @@
     input, select, textarea {
         font-size: 16px;
     }
+    
+    /* ==================== ФИКС СЕКЦИИ "О НАС" ==================== */
+    /* Принудительно переопределяем встроенные стили */
+    #about .catalog-section > div[style] {
+        display: block !important;
+    }
+    
+    #about .catalog-section > div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+    
+    #about .catalog-section > div[style*="grid-template-columns"] > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        display: block !important;
+    }
+    
+    #about .catalog-section > div[style*="grid-template-columns"] > div:first-child {
+        order: 1;
+    }
+    
+    #about .catalog-section > div[style*="grid-template-columns"] > div:last-child {
+        order: 2;
+        margin-top: 20px !important;
+    }
+    
+    /* Фиолетовая плашка с преимуществами */
+    #about div[style*="background: linear-gradient"] {
+        margin: 0 !important;
+        padding: 25px 20px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Исправляем отступы внутри плашки */
+    #about div[style*="background: linear-gradient"] ul {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    #about div[style*="background: linear-gradient"] li {
+        margin: 10px 0 !important;
+        padding: 0 !important;
+    }
 }
 
 /* ==================== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px) ==================== */
@@ -632,6 +680,19 @@
     .modal-price {
         font-size: 28px;
     }
+    
+    /* Секция "О нас" на очень маленьких экранах */
+    #about .catalog-section {
+        padding: 20px 15px !important;
+    }
+    
+    #about div[style*="background: linear-gradient"] {
+        padding: 20px 15px !important;
+    }
+    
+    #about div[style*="background: linear-gradient"] h3 {
+        font-size: 20px !important;
+    }
 }
 
 /* ==================== ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 375px) ==================== */
@@ -719,123 +780,3 @@
     }
 }
 
-/* ==================== FIX ДЛЯ iOS SAFARI ==================== */
-@supports (-webkit-touch-callout: none) {
-    .cart-toggle,
-    nav a,
-    .cta-button,
-    .add-to-cart-btn,
-    .view-details-btn,
-    .modal-add-to-cart,
-    .modal-prescription-btn {
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    input, select, textarea {
-        font-size: 16px !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .about-content {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .about-text {
-        order: 2;
-        margin-top: 20px;
-    }
-    
-    .features {
-        order: 1;
-        width: 100%;
-        margin: 0;
-    }
-}
-@media (max-width: 768px) {
-    .about-section {
-        display: block !important;
-    }
-    
-    .about-section .container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .about-content {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .about-text {
-        width: 100% !important;
-        order: 2;
-        margin-top: 30px;
-    }
-    
-    .features-sidebar {
-        width: 100% !important;
-        order: 1;
-        margin-bottom: 30px;
-    }
-    
-    .feature-list {
-        grid-template-columns: 1fr !important;
-        gap: 15px;
-    }
-    
-    .feature-card {
-        text-align: center;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    #about .catalog-section > div[style*="grid-template-columns"] {
-        display: flex !important;
-        flex-direction: column !important;
-        grid-template-columns: 1fr !important;
-        gap: 30px !important;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] > div:first-child {
-        order: 1;
-        width: 100% !important;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] > div:last-child {
-        order: 2;
-        width: 100% !important;
-    }
-    
- 
-    #about div[style*="background: linear-gradient"] {
-        margin-top: 20px !important;
-        margin-bottom: 30px !important;
-        width: 100% !important;
-    }
-    
-
-    #about .catalog-section {
-        padding: 25px 15px !important;
-    }
-    
-    #about .catalog-section > div {
-        display: block !important;
-    }
-}
-
-@media (max-width: 480px) {
-    #about div[style*="background: linear-gradient"] {
-        padding: 20px 15px !important;
-    }
-    
-    #about div[style*="background: linear-gradient"] h3 {
-        font-size: 20px !important;
-    }
-    
-    #about div[style*="background: linear-gradient"] li {
-        font-size: 14px !important;
-    }
-}
