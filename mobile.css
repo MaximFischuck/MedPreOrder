@@ -837,3 +837,31 @@
         width: 100% !important;
     }
 }
+/* Скрываем текстовую часть на мобильных */
+@media (max-width: 768px) {
+    #about .catalog-section > div[style*="grid"] > div:first-child {
+        display: none !important;
+    }
+    
+    /* Делаем плашку преимуществ на всю ширину */
+    #about .catalog-section > div[style*="grid"] > div:last-child {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    /* Центрируем содержимое плашки */
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    /* Можно также добавить немного отступов */
+    #about .catalog-section {
+        padding: 20px 10px !important;
+    }
+}
