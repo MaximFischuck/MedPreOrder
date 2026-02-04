@@ -255,6 +255,50 @@
         min-height: 44px;
     }
     
+    /* ==================== ФИКС СЕКЦИИ "О НАС" ==================== */
+    /* Контейнер с grid-разметкой */
+    #about .catalog-section > div[style*="display: grid"],
+    #about .catalog-section > div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 25px !important;
+        width: 100% !important;
+    }
+    
+    /* Оба дочерних блока - на всю ширину */
+    #about .catalog-section > div[style*="display: grid"] > div,
+    #about .catalog-section > div[style*="grid-template-columns"] > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Фиолетовая плашка с преимуществами */
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        margin-top: 20px !important;
+        padding: 25px 20px !important;
+        box-sizing: border-box !important;
+        order: 2 !important; /* Гарантируем, что плашка будет внизу */
+    }
+    
+    /* Текстовый блок */
+    #about .catalog-section > div:not([style*="background: linear-gradient"]) {
+        order: 1 !important; /* Гарантируем, что текст будет сверху */
+    }
+    
+    /* Исправляем маркеры списка в плашке */
+    #about .catalog-section > div[style*="background: linear-gradient"] ul {
+        padding-left: 20px !important;
+        margin: 15px 0 0 0 !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] li {
+        margin: 10px 0 !important;
+        padding: 0 !important;
+    }
+    
     /* ==================== КОРЗИНА ДЛЯ МОБИЛЬНЫХ ==================== */
     /* Контейнер итоговой суммы */
     .cart-summary {
@@ -558,54 +602,6 @@
     input, select, textarea {
         font-size: 16px;
     }
-    
-    /* ==================== ФИКС СЕКЦИИ "О НАС" ==================== */
-    /* Принудительно переопределяем встроенные стили */
-    #about .catalog-section > div[style] {
-        display: block !important;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] {
-        display: flex !important;
-        flex-direction: column !important;
-        grid-template-columns: 1fr !important;
-        gap: 30px !important;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] > div {
-        width: 100% !important;
-        max-width: 100% !important;
-        float: none !important;
-        display: block !important;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] > div:first-child {
-        order: 1;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] > div:last-child {
-        order: 2;
-        margin-top: 20px !important;
-    }
-    
-    /* Фиолетовая плашка с преимуществами */
-    #about div[style*="background: linear-gradient"] {
-        margin: 0 !important;
-        padding: 25px 20px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* Исправляем отступы внутри плашки */
-    #about div[style*="background: linear-gradient"] ul {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    #about div[style*="background: linear-gradient"] li {
-        margin: 10px 0 !important;
-        padding: 0 !important;
-    }
 }
 
 /* ==================== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px) ==================== */
@@ -715,11 +711,11 @@
         padding: 20px 15px !important;
     }
     
-    #about div[style*="background: linear-gradient"] {
+    #about .catalog-section > div[style*="background: linear-gradient"] {
         padding: 20px 15px !important;
     }
     
-    #about div[style*="background: linear-gradient"] h3 {
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
         font-size: 20px !important;
     }
 }
@@ -806,46 +802,5 @@
     
     .modal-right {
         max-height: calc(95vh - 100px);
-    }
-}
-/* ==================== СЕКЦИЯ "О НАС" ДЛЯ ГЛАВНОЙ ==================== */
-/* Находим контейнер с встроенным стилем grid и переопределяем его */
-#about .catalog-section > div[style*="display: grid"],
-#about .catalog-section > div[style*="grid-template-columns"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 25px !important;
-}
-
-/* Каждый дочерний элемент занимает всю ширину */
-#about .catalog-section > div[style*="display: grid"] > div,
-#about .catalog-section > div[style*="grid-template-columns"] > div {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Фиолетовый блок с преимуществами - делаем его полноразмерным */
-#about .catalog-section > div[style*="background: linear-gradient"] {
-    margin-top: 20px !important;
-    padding: 25px 20px !important;
-    box-sizing: border-box !important;
-}
-
-/* Исправляем маркеры списка */
-#about .catalog-section > div[style*="background: linear-gradient"] ul {
-    padding-left: 20px !important;
-    margin: 15px 0 0 0 !important;
-}
-
-/* Для очень маленьких экранов */
-@media (max-width: 480px) {
-    #about .catalog-section {
-        padding: 20px 15px !important;
-    }
-    
-    #about .catalog-section > div[style*="background: linear-gradient"] {
-        padding: 20px 15px !important;
     }
 }
