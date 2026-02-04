@@ -859,3 +859,33 @@
         max-height: calc(95vh - 100px);
     }
 }
+@media (max-width: 768px) {
+    #about .catalog-section > div[style*="grid"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    #about .catalog-section > div[style*="grid"] > div:first-child {
+        order: 2 !important; /* Текст внизу */
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    #about .catalog-section > div[style*="grid"] > div:last-child {
+        order: 1 !important; /* Плашка сверху */
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] ul {
+        display: inline-block !important;
+        text-align: left !important;
+    }
+}
