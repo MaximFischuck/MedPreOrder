@@ -255,32 +255,61 @@
         min-height: 44px;
     }
     
-    /* КОРЗИНА */
-    .cart-item {
-        grid-template-columns: 1fr;
-        text-align: left;
-        padding: 15px;
-        background: #f9f9f9;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #eee;
+    /* ==================== КОРЗИНА ДЛЯ МОБИЛЬНЫХ ==================== */
+    /* Контейнер итоговой суммы */
+    .cart-summary {
+        min-height: auto !important;
+        padding-bottom: 85px !important; /* Место для кнопок */
+        position: relative !important;
+        margin-bottom: 20px !important;
     }
     
-    .cart-item-image {
-        text-align: center;
-        margin-bottom: 10px;
+    /* Контейнер для кнопок внизу */
+    .summary-buttons {
+        position: absolute !important;
+        bottom: 20px !important;
+        left: 20px !important;
+        right: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
     }
     
-    .cart-item-image img {
-        width: 100px;
-        height: 100px;
+    /* Сами кнопки */
+    #clear-cart-btn,
+    #checkout-btn {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 14px !important;
+        font-size: 16px !important;
+        min-height: 50px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 10px !important;
     }
     
-    .cart-item-controls {
-        justify-content: center;
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
+    /* Кнопка оформления заказа - особенный стиль */
+    #checkout-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        color: white !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+    }
+    
+    /* Текст "Итого" - делаем крупнее */
+    .total-price {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        margin: 15px 0 !important;
+        color: #333 !important;
+    }
+    
+    #cart-total {
+        font-size: 24px !important;
+        color: #667eea !important;
     }
     
     /* СТРАНИЦА ОФОРМЛЕНИЯ ЗАКАЗА */
@@ -779,4 +808,44 @@
         max-height: calc(95vh - 100px);
     }
 }
+/* ==================== СЕКЦИЯ "О НАС" ДЛЯ ГЛАВНОЙ ==================== */
+/* Находим контейнер с встроенным стилем grid и переопределяем его */
+#about .catalog-section > div[style*="display: grid"],
+#about .catalog-section > div[style*="grid-template-columns"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+}
 
+/* Каждый дочерний элемент занимает всю ширину */
+#about .catalog-section > div[style*="display: grid"] > div,
+#about .catalog-section > div[style*="grid-template-columns"] > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Фиолетовый блок с преимуществами - делаем его полноразмерным */
+#about .catalog-section > div[style*="background: linear-gradient"] {
+    margin-top: 20px !important;
+    padding: 25px 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Исправляем маркеры списка */
+#about .catalog-section > div[style*="background: linear-gradient"] ul {
+    padding-left: 20px !important;
+    margin: 15px 0 0 0 !important;
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    #about .catalog-section {
+        padding: 20px 15px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        padding: 20px 15px !important;
+    }
+}
