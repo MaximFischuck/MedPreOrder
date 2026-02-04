@@ -805,63 +805,45 @@
     }
 }
 @media (max-width: 768px) {
-    #about .catalog-section,
-    #about .catalog-section > div,
-    #about .catalog-section > div > div,
-    #about .catalog-section > div[style],
-    #about .catalog-section *[style*="grid"],
-    #about .catalog-section *[style*="display:"] {
+    #about .catalog-section > div[style*="grid"] {
         display: flex !important;
         flex-direction: column !important;
-        flex-wrap: nowrap !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        float: none !important;
-        clear: both !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* Фиолетовая плашка - принудительно вниз */
-    #about *[style*="background: linear-gradient"] {
-        order: 9999 !important;
-        margin-top: 25px !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        padding: 25px 20px !important;
+        gap: 20px !important;
         width: 100% !important;
     }
     
-    /* Все остальные блоки - сверху */
-    #about .catalog-section > *:not([style*="background: linear-gradient"]) {
-        order: 1 !important;
-        width: 100% !important;
-    }
-}
-/* Скрываем текстовую часть на мобильных */
-@media (max-width: 768px) {
+    /* Текстовая часть: оставляем только заголовок */
     #about .catalog-section > div[style*="grid"] > div:first-child {
-        display: none !important;
-    }
-    
-    /* Делаем плашку преимуществ на всю ширину */
-    #about .catalog-section > div[style*="grid"] > div:last-child {
         width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
         text-align: center !important;
     }
     
-    /* Центрируем содержимое плашки */
+    /* Показываем только заголовок h2 */
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        display: block !important;
+        font-size: 24px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Скрываем параграфы с текстом */
+    #about .catalog-section > div[style*="grid"] > div:first-child p {
+        display: none !important;
+    }
+    
+    /* Плашка преимуществ - на всю ширину */
+    #about .catalog-section > div[style*="grid"] > div:last-child {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 20px 15px !important;
+    }
+    
+    /* Улучшаем отображение самой плашки */
     #about .catalog-section > div[style*="background: linear-gradient"] {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
         text-align: center !important;
-    }
-    
-    /* Можно также добавить немного отступов */
-    #about .catalog-section {
-        padding: 20px 10px !important;
+        border-radius: 12px !important;
     }
 }
