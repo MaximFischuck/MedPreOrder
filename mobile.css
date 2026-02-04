@@ -255,48 +255,82 @@
         min-height: 44px;
     }
     
-    /* ==================== ФИКС СЕКЦИИ "О НАС" ==================== */
-    /* Контейнер с grid-разметкой */
-    #about .catalog-section > div[style*="display: grid"],
-    #about .catalog-section > div[style*="grid-template-columns"] {
+    /* ==================== СЕКЦИЯ "О НАШЕЙ АПТЕКЕ" ==================== */
+    /* Делаем контейнер колонкой */
+    #about .catalog-section > div[style*="grid"] {
         display: flex !important;
         flex-direction: column !important;
         gap: 25px !important;
         width: 100% !important;
     }
     
-    /* Оба дочерних блока - на всю ширину */
-    #about .catalog-section > div[style*="display: grid"] > div,
-    #about .catalog-section > div[style*="grid-template-columns"] > div {
+    /* Текстовая часть: оставляем только заголовок */
+    #about .catalog-section > div[style*="grid"] > div:first-child {
+        width: 100% !important;
+        text-align: center !important;
+        order: 1 !important;
+    }
+    
+    /* Показываем только заголовок h2 */
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        display: block !important;
+        font-size: 24px !important;
+        margin-bottom: 0 !important;
+        color: #333 !important;
+    }
+    
+    /* Скрываем параграфы с текстом */
+    #about .catalog-section > div[style*="grid"] > div:first-child p {
+        display: none !important;
+    }
+    
+    /* Плашка преимуществ - на всю ширину под заголовком */
+    #about .catalog-section > div[style*="grid"] > div:last-child {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
-        padding: 0 !important;
-        flex-shrink: 0 !important;
-    }
-    
-    /* Фиолетовая плашка с преимуществами */
-    #about .catalog-section > div[style*="background: linear-gradient"] {
-        margin-top: 20px !important;
         padding: 25px 20px !important;
+        order: 2 !important;
         box-sizing: border-box !important;
-        order: 2 !important; /* Гарантируем, что плашка будет внизу */
     }
     
-    /* Текстовый блок */
-    #about .catalog-section > div:not([style*="background: linear-gradient"]) {
-        order: 1 !important; /* Гарантируем, что текст будет сверху */
+    /* Стили для самой фиолетовой плашки */
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        border-radius: 12px !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     }
     
-    /* Исправляем маркеры списка в плашке */
+    /* Заголовок в плашке */
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+        color: white !important;
+        font-size: 22px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Список преимуществ */
     #about .catalog-section > div[style*="background: linear-gradient"] ul {
-        padding-left: 20px !important;
-        margin: 15px 0 0 0 !important;
+        padding-left: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
     }
     
     #about .catalog-section > div[style*="background: linear-gradient"] li {
-        margin: 10px 0 !important;
+        color: white !important;
+        margin: 12px 0 !important;
+        font-size: 16px !important;
+        text-align: center !important;
+        list-style: none !important;
         padding: 0 !important;
+    }
+    
+    /* Иконки в списке */
+    #about .catalog-section > div[style*="background: linear-gradient"] li i {
+        margin-right: 10px !important;
+        font-size: 18px !important;
     }
     
     /* ==================== КОРЗИНА ДЛЯ МОБИЛЬНЫХ ==================== */
@@ -668,6 +702,19 @@
         font-size: 20px;
     }
     
+    /* Секция "О нашей аптеке" на маленьких экранах */
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        font-size: 22px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+        font-size: 20px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] li {
+        font-size: 15px !important;
+    }
+    
     .order-page {
         margin: 15px auto;
         padding: 0 10px;
@@ -705,19 +752,6 @@
     .modal-price {
         font-size: 28px;
     }
-    
-    /* Секция "О нас" на очень маленьких экранах */
-    #about .catalog-section {
-        padding: 20px 15px !important;
-    }
-    
-    #about .catalog-section > div[style*="background: linear-gradient"] {
-        padding: 20px 15px !important;
-    }
-    
-    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
-        font-size: 20px !important;
-    }
 }
 
 /* ==================== ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 375px) ==================== */
@@ -751,6 +785,27 @@
     
     .section-title {
         font-size: 22px;
+    }
+    
+    /* Секция "О нашей аптеке" на очень маленьких экранах */
+    #about .catalog-section {
+        padding: 20px 15px !important;
+    }
+    
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        font-size: 20px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        padding: 20px 15px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+        font-size: 18px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] li {
+        font-size: 14px !important;
     }
     
     .filter-btn {
@@ -802,48 +857,5 @@
     
     .modal-right {
         max-height: calc(95vh - 100px);
-    }
-}
-@media (max-width: 768px) {
-    #about .catalog-section > div[style*="grid"] {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        width: 100% !important;
-    }
-    
-    /* Текстовая часть: оставляем только заголовок */
-    #about .catalog-section > div[style*="grid"] > div:first-child {
-        width: 100% !important;
-        text-align: center !important;
-    }
-    
-    /* Показываем только заголовок h2 */
-    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
-        display: block !important;
-        font-size: 24px !important;
-        margin-bottom: 0 !important;
-    }
-    
-    /* Скрываем параграфы с текстом */
-    #about .catalog-section > div[style*="grid"] > div:first-child p {
-        display: none !important;
-    }
-    
-    /* Плашка преимуществ - на всю ширину */
-    #about .catalog-section > div[style*="grid"] > div:last-child {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 20px 15px !important;
-    }
-    
-    /* Улучшаем отображение самой плашки */
-    #about .catalog-section > div[style*="background: linear-gradient"] {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        border-radius: 12px !important;
     }
 }
