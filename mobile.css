@@ -859,33 +859,112 @@
         max-height: calc(95vh - 100px);
     }
 }
+.about-desktop-layout {
+    display: none !important;
+}
+
+/* Показываем мобильную версию */
+.about-mobile-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+    margin-top: 25px !important;
+    width: 100% !important;
+}
 @media (max-width: 768px) {
-    #about .catalog-section > div[style*="grid"] {
+    .about-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
-        gap: 30px !important;
-    }
-    
-    #about .catalog-section > div[style*="grid"] > div:first-child {
-        order: 2 !important; /* Текст внизу */
+        gap: 25px !important;
+        margin-top: 25px !important;
         width: 100% !important;
-        text-align: center !important;
     }
     
-    #about .catalog-section > div[style*="grid"] > div:last-child {
-        order: 1 !important; /* Плашка сверху */
+    /* Плашка преимуществ - сверху, по центру */
+    .about-features-card {
+        width: 100% !important;
+        order: -1 !important; /* Перемещаем наверх */
+        display: flex !important;
+        justify-content: center !important;
+    }
+    
+    .about-features-card .features-content {
         width: 100% !important;
         max-width: 500px !important;
         margin: 0 auto !important;
-    }
-    
-    #about .catalog-section > div[style*="background: linear-gradient"] {
-        width: 100% !important;
         text-align: center !important;
+        padding: 25px 20px !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] ul {
+    .about-features-card h3 {
+        font-size: 22px !important;
+        margin-bottom: 18px !important;
+    }
+    
+    .about-features-card .features-list {
         display: inline-block !important;
         text-align: left !important;
+    }
+    
+    .about-features-card .features-list li {
+        justify-content: flex-start !important;
+        text-align: left !important;
+        margin-bottom: 12px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Текст - снизу */
+    .about-text-content {
+        width: 100% !important;
+        text-align: center !important;
+        order: 2 !important; /* Перемещаем вниз */
+    }
+    
+    .about-text-content p {
+        font-size: 16px !important;
+        margin-bottom: 18px !important;
+    }
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 480px) {
+    .about-features-card .features-content {
+        padding: 22px 18px !important;
+        max-width: 100% !important;
+    }
+    
+    .about-features-card h3 {
+        font-size: 20px !important;
+    }
+    
+    .about-features-card .features-list li {
+        font-size: 15px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .about-text-content p {
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .about-features-card .features-content {
+        padding: 20px 15px !important;
+    }
+    
+    .about-features-card h3 {
+        font-size: 19px !important;
+    }
+    
+    .about-features-card .features-list li {
+        font-size: 14px !important;
+    }
+    
+    .about-features-card .features-list i {
+        font-size: 16px !important;
+    }
+    
+    .about-text-content p {
+        font-size: 14px !important;
     }
 }
