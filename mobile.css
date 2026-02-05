@@ -255,32 +255,139 @@
         min-height: 44px;
     }
     
-    /* КОРЗИНА */
-    .cart-item {
-        grid-template-columns: 1fr;
-        text-align: left;
-        padding: 15px;
-        background: #f9f9f9;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #eee;
+    /* ==================== СЕКЦИЯ "О НАШЕЙ АПТЕКЕ" ==================== */
+    /* Делаем контейнер колонкой */
+    #about .catalog-section > div[style*="grid"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 25px !important;
+        width: 100% !important;
     }
     
-    .cart-item-image {
-        text-align: center;
-        margin-bottom: 10px;
+    /* Текстовая часть: оставляем только заголовок */
+    #about .catalog-section > div[style*="grid"] > div:first-child {
+        width: 100% !important;
+        text-align: center !important;
+        order: 1 !important;
     }
     
-    .cart-item-image img {
-        width: 100px;
-        height: 100px;
+    /* Показываем только заголовок h2 */
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        display: block !important;
+        font-size: 24px !important;
+        margin-bottom: 0 !important;
+        color: #333 !important;
     }
     
-    .cart-item-controls {
-        justify-content: center;
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
+    /* Скрываем параграфы с текстом */
+    #about .catalog-section > div[style*="grid"] > div:first-child p {
+        display: none !important;
+    }
+    
+    /* Плашка преимуществ - на всю ширину под заголовком */
+    #about .catalog-section > div[style*="grid"] > div:last-child {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 25px 20px !important;
+        order: 2 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Стили для самой фиолетовой плашки */
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        border-radius: 12px !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    }
+    
+    /* Заголовок в плашке */
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+        color: white !important;
+        font-size: 22px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Список преимуществ */
+    #about .catalog-section > div[style*="background: linear-gradient"] ul {
+        padding-left: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] li {
+        color: white !important;
+        margin: 12px 0 !important;
+        font-size: 16px !important;
+        text-align: center !important;
+        list-style: none !important;
+        padding: 0 !important;
+    }
+    
+    /* Иконки в списке */
+    #about .catalog-section > div[style*="background: linear-gradient"] li i {
+        margin-right: 10px !important;
+        font-size: 18px !important;
+    }
+    
+    /* ==================== КОРЗИНА ДЛЯ МОБИЛЬНЫХ ==================== */
+    /* Контейнер итоговой суммы */
+    .cart-summary {
+        min-height: auto !important;
+        padding-bottom: 85px !important; /* Место для кнопок */
+        position: relative !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Контейнер для кнопок внизу */
+    .summary-buttons {
+        position: absolute !important;
+        bottom: 20px !important;
+        left: 20px !important;
+        right: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    /* Сами кнопки */
+    #clear-cart-btn,
+    #checkout-btn {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 14px !important;
+        font-size: 16px !important;
+        min-height: 50px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Кнопка оформления заказа - особенный стиль */
+    #checkout-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        color: white !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+    }
+    
+    /* Текст "Итого" - делаем крупнее */
+    .total-price {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        margin: 15px 0 !important;
+        color: #333 !important;
+    }
+    
+    #cart-total {
+        font-size: 24px !important;
+        color: #667eea !important;
     }
     
     /* СТРАНИЦА ОФОРМЛЕНИЯ ЗАКАЗА */
@@ -595,6 +702,19 @@
         font-size: 20px;
     }
     
+    /* Секция "О нашей аптеке" на маленьких экранах */
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        font-size: 22px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+        font-size: 20px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] li {
+        font-size: 15px !important;
+    }
+    
     .order-page {
         margin: 15px auto;
         padding: 0 10px;
@@ -667,6 +787,27 @@
         font-size: 22px;
     }
     
+    /* Секция "О нашей аптеке" на очень маленьких экранах */
+    #about .catalog-section {
+        padding: 20px 15px !important;
+    }
+    
+    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
+        font-size: 20px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] {
+        padding: 20px 15px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+        font-size: 18px !important;
+    }
+    
+    #about .catalog-section > div[style*="background: linear-gradient"] li {
+        font-size: 14px !important;
+    }
+    
     .filter-btn {
         padding: 8px 14px;
         font-size: 13px;
@@ -718,124 +859,112 @@
         max-height: calc(95vh - 100px);
     }
 }
-
-/* ==================== FIX ДЛЯ iOS SAFARI ==================== */
-@supports (-webkit-touch-callout: none) {
-    .cart-toggle,
-    nav a,
-    .cta-button,
-    .add-to-cart-btn,
-    .view-details-btn,
-    .modal-add-to-cart,
-    .modal-prescription-btn {
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    input, select, textarea {
-        font-size: 16px !important;
-    }
+.about-desktop-layout {
+    display: none !important;
 }
 
-@media (max-width: 768px) {
-    .about-content {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .about-text {
-        order: 2;
-        margin-top: 20px;
-    }
-    
-    .features {
-        order: 1;
-        width: 100%;
-        margin: 0;
-    }
+/* Показываем мобильную версию */
+.about-mobile-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+    margin-top: 25px !important;
+    width: 100% !important;
 }
 @media (max-width: 768px) {
-    .about-section {
-        display: block !important;
-    }
-    
-    .about-section .container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .about-content {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .about-text {
-        width: 100% !important;
-        order: 2;
-        margin-top: 30px;
-    }
-    
-    .features-sidebar {
-        width: 100% !important;
-        order: 1;
-        margin-bottom: 30px;
-    }
-    
-    .feature-list {
-        grid-template-columns: 1fr !important;
-        gap: 15px;
-    }
-    
-    .feature-card {
-        text-align: center;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    #about .catalog-section > div[style*="grid-template-columns"] {
+    .about-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
-        grid-template-columns: 1fr !important;
-        gap: 30px !important;
-    }
-    
-    #about .catalog-section > div[style*="grid-template-columns"] > div:first-child {
-        order: 1;
+        gap: 25px !important;
+        margin-top: 25px !important;
         width: 100% !important;
     }
     
-    #about .catalog-section > div[style*="grid-template-columns"] > div:last-child {
-        order: 2;
+    /* Плашка преимуществ - сверху, по центру */
+    .about-features-card {
         width: 100% !important;
+        order: -1 !important; /* Перемещаем наверх */
+        display: flex !important;
+        justify-content: center !important;
     }
     
- 
-    #about div[style*="background: linear-gradient"] {
-        margin-top: 20px !important;
-        margin-bottom: 30px !important;
+    .about-features-card .features-content {
         width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 25px 20px !important;
     }
     
-
-    #about .catalog-section {
-        padding: 25px 15px !important;
+    .about-features-card h3 {
+        font-size: 22px !important;
+        margin-bottom: 18px !important;
     }
     
-    #about .catalog-section > div {
-        display: block !important;
+    .about-features-card .features-list {
+        display: inline-block !important;
+        text-align: left !important;
+    }
+    
+    .about-features-card .features-list li {
+        justify-content: flex-start !important;
+        text-align: left !important;
+        margin-bottom: 12px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Текст - снизу */
+    .about-text-content {
+        width: 100% !important;
+        text-align: center !important;
+        order: 2 !important; /* Перемещаем вниз */
+    }
+    
+    .about-text-content p {
+        font-size: 16px !important;
+        margin-bottom: 18px !important;
     }
 }
 
+/* Адаптация для маленьких экранов */
 @media (max-width: 480px) {
-    #about div[style*="background: linear-gradient"] {
-        padding: 20px 15px !important;
+    .about-features-card .features-content {
+        padding: 22px 18px !important;
+        max-width: 100% !important;
     }
     
-    #about div[style*="background: linear-gradient"] h3 {
+    .about-features-card h3 {
         font-size: 20px !important;
     }
     
-    #about div[style*="background: linear-gradient"] li {
+    .about-features-card .features-list li {
+        font-size: 15px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .about-text-content p {
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .about-features-card .features-content {
+        padding: 20px 15px !important;
+    }
+    
+    .about-features-card h3 {
+        font-size: 19px !important;
+    }
+    
+    .about-features-card .features-list li {
+        font-size: 14px !important;
+    }
+    
+    .about-features-card .features-list i {
+        font-size: 16px !important;
+    }
+    
+    .about-text-content p {
         font-size: 14px !important;
     }
 }

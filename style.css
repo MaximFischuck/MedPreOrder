@@ -1429,3 +1429,60 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+.about-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.about-text-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.about-text-content p {
+    margin-bottom: 20px;
+}
+
+.about-text-content p:last-child {
+    margin-bottom: 0;
+}
+
+.about-features-card .features-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: white;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.about-features-card h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.about-features-card .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-features-card .features-list li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.about-features-card .features-list li:last-child {
+    margin-bottom: 0;
+}
+
+.about-features-card .features-list i {
+    color: white;
+    font-size: 18px;
+}
