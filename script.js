@@ -1016,3 +1016,56 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeOrderPage();
     }
 });
+
+// ==================== ТЕМНАЯ ТЕМА ====================
+
+function initThemeToggle() {
+    // Создаем кнопки переключения темы
+    const themeToggle = document.createElement('div');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.innerHTML = `
+        <button class="theme-btn light-btn" onclick="window.setTheme('light')">
+            <i class="fas fa-sun"></i>
+        </button>
+        <button class="theme-btn dark-btn" onclick="window.setTheme('dark')">
+            <i class="fas fa-moon"></i>
+        </button>
+    `;
+    document.body.appendChild(themeToggle);
+    
+    // Загружаем сохраненную тему
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+}
+
+function setTheme(theme) {
+    // Устанавливаем тему на корневой элемент
+    document.documentElement.setAttribute('data-theme', theme);
+    
+    // Сохраняем в localStorage
+    localStorage.setItem('theme', theme);
+    
+    // Обновляем активную кнопку
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    if (theme === 'light') {
+        document.querySelector('.light-btn')?.classList.add('active');
+    } else {
+        document.querySelector('.dark-btn')?.classList.add('active');
+    }
+    
+    console.log('Тема изменена на:', theme);
+}
+
+// Добавляем функции в глобальную область
+window.setTheme = setTheme;
+
+// Инициализируем при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Добавляем переключатель темы
+    initThemeToggle();
+    
+    // Остальной код инициализации...
+});
