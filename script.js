@@ -339,8 +339,10 @@ function updateProductCatalog() {
     let activeFilter = 'all';
     document.querySelectorAll('.filter-btn').forEach(btn => {
         if (btn.classList.contains('active')) {
-            const match = btn.onclick?.toString().match(/filterProducts\('([^']+)'\)/);
-            if (match) activeFilter = match[1];
+            // Пробуем получить категорию из data-атрибута или из onclick
+            const category = btn.getAttribute('data-category') || 
+                            (btn.onclick ? btn.onclick.toString().match(/filterProducts\('([^']+)'\)/)?.[1] : null);
+            if (category) activeFilter = category;
         }
     });
     
@@ -358,7 +360,7 @@ function updateProductCatalog() {
         return `
         <div class="product-card">
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x150?text=Нет+изображения'">
                 ${!product.inStock ? '<span class="out-of-stock">Нет в наличии</span>' : ''}
                 ${product.prescription ? '<span class="prescription">Рецептурный</span>' : ''}
             </div>
@@ -367,7 +369,7 @@ function updateProductCatalog() {
                 <p class="product-description">${product.description}</p>
                 <div class="product-meta">
                     <span class="product-category">${product.category}</span>
-                    <span class="product-form">${product.form}, ${product.quantity}</span>
+                    <span class="product-form">${product.form || ''}, ${product.quantity || ''}</span>
                 </div>
                 <div class="product-price">${product.price} ₽</div>
             </div>
@@ -398,17 +400,18 @@ function updateProductCatalog() {
 }
 
 function filterProducts(category) {
+    console.log('Фильтрация по категории:', category);
+    
     // Обновляем активную кнопку
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
+        // Проверяем data-атрибут или текст кнопки
+        const btnCategory = btn.getAttribute('data-category') || 
+                           btn.textContent.trim().toLowerCase();
+        if (btnCategory === category || btnCategory === category.toLowerCase()) {
+            btn.classList.add('active');
+        }
     });
-    
-    // Ищем кнопку, которая вызвала функцию
-    let targetBtn = event?.target;
-    if (targetBtn?.tagName === 'I') {
-        targetBtn = targetBtn.parentElement;
-    }
-    if (targetBtn) targetBtn.classList.add('active');
     
     // Обновляем каталог
     updateProductCatalog();
@@ -446,7 +449,7 @@ function showProductDetails(productId) {
             <div class="modal-body">
                 <div class="modal-left">
                     <div class="modal-product-image">
-                        <img src="${product.image}" alt="${product.name}">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Нет+изображения'">
                         <div class="image-badges">
                             ${product.prescription ? '<span class="prescription-badge">Рецептурный</span>' : ''}
                             ${product.inStock ? '<span class="in-stock-badge">В наличии</span>' : '<span class="out-of-stock-badge">Нет в наличии</span>'}
@@ -456,8 +459,8 @@ function showProductDetails(productId) {
                     <div class="modal-price-section">
                         <div class="modal-price">${product.price} ₽</div>
                         <div class="product-form-info">
-                            <span class="form-type">${product.form}</span>
-                            <span class="quantity-info">${product.quantity}</span>
+                            <span class="form-type">${product.form || ''}</span>
+                            <span class="quantity-info">${product.quantity || ''}</span>
                         </div>
                     </div>
                     
@@ -478,54 +481,54 @@ function showProductDetails(productId) {
                         <h2>${product.name}</h2>
                         <div class="product-meta">
                             <span class="product-category">${product.category}</span>
-                            <span class="active-substance">Действующее вещество: ${product.activeSubstance}</span>
+                            <span class="active-substance">Действующее вещество: ${product.activeSubstance || ''}</span>
                         </div>
                     </div>
                     
                     <div class="modal-sections">
                         <div class="modal-section">
                             <h3><i class="fas fa-info-circle"></i> Описание</h3>
-                            <p>${product.detailedDescription}</p>
+                            <p>${product.detailedDescription || product.description}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-capsules"></i> Состав</h3>
-                            <p>${product.composition}</p>
+                            <p>${product.composition || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-syringe"></i> Способ применения и дозы</h3>
-                            <p>${product.dosage}</p>
+                            <p>${product.dosage || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-ban"></i> Противопоказания</h3>
-                            <p>${product.contraindications}</p>
+                            <p>${product.contraindications || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-exclamation-triangle"></i> Побочные действия</h3>
-                            <p>${product.sideEffects}</p>
+                            <p>${product.sideEffects || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-industry"></i> Производитель</h3>
-                            <p>${product.manufacturer}</p>
+                            <p>${product.manufacturer || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-archive"></i> Условия хранения</h3>
-                            <p>${product.storageConditions}</p>
+                            <p>${product.storageConditions || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-calendar-alt"></i> Срок годности</h3>
-                            <p>${product.shelfLife}</p>
+                            <p>${product.shelfLife || 'Информация отсутствует'}</p>
                         </div>
                         
                         <div class="modal-section">
                             <h3><i class="fas fa-barcode"></i> Код АТХ</h3>
-                            <p>${product.atcCode}</p>
+                            <p>${product.atcCode || 'Информация отсутствует'}</p>
                         </div>
                     </div>
                 </div>
@@ -553,15 +556,15 @@ function addMobileTabs(modal, product) {
     tabsContainer.className = 'mobile-tabs';
     
     const sectionsData = [
-        { icon: 'fa-info-circle', title: 'Описание', content: product.detailedDescription },
-        { icon: 'fa-capsules', title: 'Состав', content: product.composition },
-        { icon: 'fa-syringe', title: 'Дозировка', content: product.dosage },
-        { icon: 'fa-ban', title: 'Противопоказания', content: product.contraindications },
-        { icon: 'fa-exclamation-triangle', title: 'Побочные эффекты', content: product.sideEffects },
-        { icon: 'fa-industry', title: 'Производитель', content: product.manufacturer },
-        { icon: 'fa-archive', title: 'Хранение', content: product.storageConditions },
-        { icon: 'fa-calendar-alt', title: 'Срок годности', content: product.shelfLife },
-        { icon: 'fa-barcode', title: 'Код АТХ', content: product.atcCode }
+        { icon: 'fa-info-circle', title: 'Описание', content: product.detailedDescription || product.description },
+        { icon: 'fa-capsules', title: 'Состав', content: product.composition || 'Информация отсутствует' },
+        { icon: 'fa-syringe', title: 'Дозировка', content: product.dosage || 'Информация отсутствует' },
+        { icon: 'fa-ban', title: 'Противопоказания', content: product.contraindications || 'Информация отсутствует' },
+        { icon: 'fa-exclamation-triangle', title: 'Побочные эффекты', content: product.sideEffects || 'Информация отсутствует' },
+        { icon: 'fa-industry', title: 'Производитель', content: product.manufacturer || 'Информация отсутствует' },
+        { icon: 'fa-archive', title: 'Хранение', content: product.storageConditions || 'Информация отсутствует' },
+        { icon: 'fa-calendar-alt', title: 'Срок годности', content: product.shelfLife || 'Информация отсутствует' },
+        { icon: 'fa-barcode', title: 'Код АТХ', content: product.atcCode || 'Информация отсутствует' }
     ];
     
     // Скрываем все секции
@@ -618,8 +621,8 @@ function showPrescriptionInfo(productId) {
           `Для покупки необходим оригинал рецепта с печатью врача.\n` +
           `Рецепт должен быть выписан на официальном бланке.\n` +
           `Срок действия рецепта: 30 дней с даты выписки.\n` +
-          `Действующее вещество: ${product.activeSubstance}\n` +
-          `Код АТХ: ${product.atcCode}`);
+          `Действующее вещество: ${product.activeSubstance || ''}\n` +
+          `Код АТХ: ${product.atcCode || ''}`);
 }
 
 // ==================== ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ====================
@@ -638,7 +641,7 @@ function loadPopularProducts() {
             return `
             <div class="product-card" data-product-id="${product.id}">
                 <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x150?text=Нет+изображения'">
                     ${product.prescription ? '<span class="prescription">Рецептурный</span>' : ''}
                 </div>
                 <div class="product-info">
@@ -881,6 +884,50 @@ function initializeOrderPage() {
     }
 }
 
+// ==================== ФУНКЦИИ ДЛЯ МОБИЛЬНОГО МЕНЮ ====================
+
+function initMobileMenu() {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const body = document.body;
+    
+    if (menuToggle && mainNav) {
+        // Создаем оверлей, если его нет
+        let overlay = document.querySelector('.menu-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'menu-overlay';
+            body.appendChild(overlay);
+        }
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        overlay.addEventListener('click', function() {
+            menuToggle.classList.remove('active');
+            mainNav.classList.remove('active');
+            this.classList.remove('active');
+            body.style.overflow = '';
+        });
+    }
+    
+    // Эффект при скролле
+    const header = document.querySelector('.site-header');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+}
+
 // ==================== ГЛОБАЛЬНЫЙ ЭКСПОРТ ====================
 
 window.cart = cart;
@@ -907,6 +954,7 @@ window.validateFullName = validateFullName;
 window.validatePhone = validatePhone;
 window.validateEmail = validateEmail;
 window.validateOrderForm = validateOrderForm;
+window.initMobileMenu = initMobileMenu;
 
 // ==================== ЗАГРУЗКА СТРАНИЦЫ ====================
 
@@ -917,9 +965,13 @@ document.addEventListener('DOMContentLoaded', function() {
     loadCartFromStorage();
     updateCartUI();
     
+    // Инициализируем мобильное меню
+    initMobileMenu();
+    
     // Для главной страницы - показываем популярные товары
     if (window.location.pathname.includes('index.html') || 
         window.location.pathname.endsWith('/') ||
+        window.location.pathname === '' ||
         window.location.href.includes('index.html')) {
         console.log('Инициализация главной страницы...');
         loadPopularProducts();
@@ -931,7 +983,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProductCatalog();
         
         // Устанавливаем активную кнопку "Все"
-        const allBtn = document.querySelector('.filter-btn[onclick*="all"]');
+        const allBtn = document.querySelector('.filter-btn[onclick*="all"], .filter-btn[data-category="all"]');
         if (allBtn) allBtn.classList.add('active');
     }
     
@@ -959,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Для страницы оформления заказа
-    if (window.location.pathname.includes('order.html')) {
+    if (window.location.pathname.includes('order.html') || window.location.href.includes('order.html')) {
         console.log('Инициализация страницы оформления заказа...');
         initializeOrderPage();
     }

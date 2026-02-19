@@ -6,11 +6,11 @@
     <title>MedPreOrder - Корзина</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
-    <!-- Шапка -->
-    <header>
+    <!-- Шапка (такая же как на главной) -->
+    <header class="site-header">
         <div class="container">
             <div class="header-content">
                 <!-- Логотип -->
@@ -24,19 +24,54 @@
                     </div>
                 </a>
                 
+                <!-- Мобильное меню (бургер) -->
+                <button class="mobile-menu-toggle" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
                 <!-- Навигация -->
-                <nav>
-                    <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
-                        <li><a href="catalog.html"><i class="fas fa-pills"></i> Каталог</a></li>
-                        <li><a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i> Корзина</a></li>
+                <nav class="main-nav">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Главная</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="catalog.html" class="nav-link">
+                                <i class="fas fa-pills"></i>
+                                <span>Каталог</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#about" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>О нас</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#delivery" class="nav-link">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Доставка</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#contacts" class="nav-link">
+                                <i class="fas fa-address-book"></i>
+                                <span>Контакты</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 
-                <!-- Счетчик корзины -->
-                <div class="cart-header">
-                    <button class="cart-toggle" onclick="window.location.href='cart.html'">
+                <!-- Корзина -->
+                <div class="cart-wrapper">
+                    <button class="cart-button active" onclick="window.location.href='cart.html'">
                         <i class="fas fa-shopping-cart"></i>
+                        <span>Корзина</span>
                         <span id="cart-count" class="cart-count">0</span>
                     </button>
                 </div>
@@ -46,7 +81,7 @@
 
     <!-- Основной контент -->
     <main class="container">
-        <h1 class="section-title">
+        <h1 class="section-title" style="color: white; margin-bottom: 30px;">
             <i class="fas fa-shopping-cart"></i>
             Ваша корзина
         </h1>
@@ -64,19 +99,22 @@
 
         <div id="cart-summary" class="cart-summary" style="display: none;">
             <h3>Сумма заказа</h3>
-            <div style="margin: 20px 0;">
-                <p style="font-size: 18px; color: #666;">
-                    Товаров: <span id="items-count">0</span> шт.
-                </p>
-                <p class="total-price">
-                    Итого: <span id="cart-total">0</span> ₽
-                </p>
+            
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Товаров:</span>
+                    <span id="items-count">0</span>
+                </div>
+                <div class="summary-row grand-total">
+                    <span>Итого:</span>
+                    <span id="cart-total">0</span>
+                </div>
             </div>
             
             <div class="summary-buttons">
                 <button id="clear-cart-btn" class="btn-danger">
                     <i class="fas fa-trash"></i>
-                    Очистить корзину
+                    Очистить
                 </button>
                 <button id="checkout-btn" class="btn-primary">
                     <i class="fas fa-check"></i>
@@ -125,8 +163,53 @@
         </div>
     </footer>
 
-    <!-- Подключаем общий JS -->
+    <!-- Подключаем скрипты -->
     <script src="data.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Скрипт для мобильного меню -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Мобильное меню
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        const body = document.body;
+        
+        if (menuToggle && mainNav) {
+            let overlay = document.querySelector('.menu-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'menu-overlay';
+                body.appendChild(overlay);
+            }
+            
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mainNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            overlay.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                this.classList.remove('active');
+                body.style.overflow = '';
+            });
+        }
+        
+        // Эффект при скролле
+        const header = document.querySelector('.site-header');
+        if (header) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
