@@ -1,225 +1,197 @@
-/* ==================== МОБИЛЬНАЯ ВЕРСИЯ (до 768px) ==================== */
+/* ============================================================
+    VitaPrime - ПОЛНЫЙ MOBILE CSS (Версия 2.0)
+   ============================================================ */
+
 @media (max-width: 768px) {
-    /* ----- ОБЩИЕ СТИЛИ ----- */
+    /* ----- 1. ОСНОВНЫЕ НАСТРОЙКИ ----- */
     body {
-        font-size: 14px;
+        font-size: 15px;
         overflow-x: hidden;
         width: 100%;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-    }
-    
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 12px;
-    }
-    
-    /* Основной контент */
-    main {
-        flex: 1 0 auto;
-        margin-top: 60px; /* Уменьшил отступ */
-        padding-top: 10px;
-        width: 100%;
+        background: var(--bg-secondary) !important; /* Упрощаем фон для мобильных */
     }
 
-    /* ----- КОМПАКТНАЯ ШАПКА ----- */
+    .container {
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    main {
+        margin-top: 70px; /* Отступ под фиксированную шапку */
+        flex: 1 0 auto;
+    }
+
+    /* ----- 2. ШАПКА (Header) ----- */
     .site-header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        height: 60px;
         z-index: 1000;
-        background: white;
-        padding: 8px 0; /* Уменьшил padding */
+        background: var(--bg-secondary);
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
     }
-    
+
     .header-content {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 8px;
-        padding: 0;
-    }
-    
-    /* Левая часть - логотип */
-    .logo {
-        display: flex;
         align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
+        width: 100%;
     }
-    
-    .logo-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 18px;
-        border-radius: 10px;
-    }
-    
-    .logo-text h1 {
-        font-size: 16px;
-        line-height: 1.2;
-    }
-    
+
     .logo-text p {
-        display: none; /* Скрываем "Аптека с доставкой" */
+        display: none; /* Скрываем подзаголовок на малых экранах */
     }
-    
-    /* Правая часть - корзина */
-    .cart-wrapper {
-        flex-shrink: 0;
+
+    .logo-text h1 {
+        font-size: 1.2rem;
     }
-    
-    .cart-button {
-        padding: 8px 12px;
-        gap: 6px;
-        border: none;
-        background: transparent;
-        box-shadow: none;
-    }
-    
-    .cart-button span:not(.cart-count) {
-        display: none; /* Скрываем слово "Корзина" */
-    }
-    
-    .cart-button i {
-        font-size: 20px;
-        color: #667eea;
-    }
-    
-    .cart-count {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        width: 18px;
-        height: 18px;
-        font-size: 11px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* Навигация с иконками */
+
+    /* ----- 3. МОБИЛЬНАЯ НАВИГАЦИЯ ----- */
     .main-nav {
-        flex: 1;
-        margin: 0 5px;
-    }
-    
-    .nav-menu {
-        display: flex;
-        justify-content: center;
-        gap: 2px;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .nav-item {
-        flex: 1;
-        max-width: 60px; /* Ограничиваем ширину */
-    }
-    
-    .nav-link {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Полностью скрыто справа */
+        width: 280px;
+        height: 100vh;
+        background: var(--bg-card);
+        padding: 80px 24px 24px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 6px 0;
-        gap: 2px;
-        background: transparent;
-        box-shadow: none;
-        color: #666;
-        font-size: 10px;
-        font-weight: 500;
-        min-height: auto;
-        border-radius: 8px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001;
+        box-shadow: -10px 0 20px rgba(0,0,0,0.1);
     }
-    
-    .nav-link i {
-        display: block !important; /* Показываем иконки */
-        font-size: 20px;
-        margin-bottom: 2px;
-        color: #666;
+
+    /* Когда через JS добавляем класс .active */
+    .main-nav.active {
+        right: 0;
     }
-    
-    .nav-link span {
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .main-nav ul li a {
+        font-size: 1.1rem;
         display: block;
-        font-size: 9px;
-        text-transform: lowercase;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
-    
-    .nav-link.active {
+
+    /* Затемнение фона при открытом меню */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        display: none;
+        z-index: 1000;
+    }
+
+    .menu-overlay.active {
+        display: block;
+    }
+
+    /* Кнопка-бургер */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 24px;
+        height: 18px;
         background: transparent;
-        color: #667eea;
-        box-shadow: none;
+        border: none;
+        padding: 0;
+        z-index: 1100;
     }
-    
-    .nav-link.active i {
-        color: #667eea;
+
+    .mobile-menu-toggle span {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        transition: all 0.3s ease;
     }
-    
-    .nav-link.active span {
-        color: #667eea;
-        font-weight: 600;
+
+    /* Анимация бургера в крестик */
+    .mobile-menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ----- 4. КАТАЛОГ И КАРТОЧКИ ----- */
+    .products-grid {
+        grid-template-columns: 1fr; /* Одна колонка на узких телефонах */
+        gap: 16px;
     }
-    
-    /* Скрываем старую навигацию */
-    nav {
-        display: none;
+
+    @media (min-width: 480px) {
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr); /* Две колонки на широких телефонах */
+        }
     }
-    
-    /* Убираем лишние отступы */
-    .cart-header {
-        display: none;
+
+    .product-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .product-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .add-to-cart-btn, .view-details-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    /* ----- 5. КОРЗИНА И ОФОРМЛЕНИЕ ----- */
+    .cart-item {
+        grid-template-columns: 70px 1fr;
+        grid-template-areas: 
+            "image info"
+            "image price"
+            "controls total"
+            "remove remove";
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .cart-item-image { width: 70px; height: 70px; }
+
+    .summary-buttons {
+        flex-direction: column;
+    }
+
+    .order-container {
+        grid-template-columns: 1fr; /* Форма и чекбокс в одну колонку */
+    }
+
+    /* ----- 6. ФУТЕР ----- */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+    }
+
+    .contact-info li {
+        justify-content: center;
     }
 }
 
-/* ==================== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px) ==================== */
-@media (max-width: 480px) {
-    .logo-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 16px;
-    }
-    
-    .logo-text h1 {
-        font-size: 14px;
-    }
-    
-    .nav-link i {
-        font-size: 18px;
-    }
-    
-    .nav-link span {
-        font-size: 8px;
-    }
-    
-    .cart-button i {
-        font-size: 18px;
-    }
-    
-    main {
-        margin-top: 55px;
-    }
-}
-
-/* ==================== ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 375px) ==================== */
-@media (max-width: 375px) {
-    .logo-text h1 {
-        font-size: 13px;
-    }
-    
-    .nav-item {
-        max-width: 50px;
-    }
-    
-    .nav-link i {
-        font-size: 16px;
-    }
-    
-    .nav-link span {
-        font-size: 7px;
-    }
+/* Фиксы для очень маленьких экранов */
+@media (max-width: 360px) {
+    .logo-text h1 { font-size: 1rem; }
+    .section-title { font-size: 1.4rem; }
 }
