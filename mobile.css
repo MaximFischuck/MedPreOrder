@@ -1,10 +1,13 @@
 /* ==================== МОБИЛЬНАЯ ВЕРСИЯ (до 768px) ==================== */
 @media (max-width: 768px) {
-    /* Общие стили */
+    /* ----- ОБЩИЕ СТИЛИ ----- */
     body {
         font-size: 14px;
         overflow-x: hidden;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
     
     .container {
@@ -13,7 +16,64 @@
         padding: 0 12px;
     }
     
-    /* ШАПКА - фиксированная и компактная */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Основной контент */
+    main {
+        flex: 1 0 auto;
+        margin-top: 70px;
+        padding-top: 10px;
+        width: 100%;
+    }
+    
+    /* Футер всегда внизу */
+    .footer {
+        flex-shrink: 0;
+        width: 100%;
+    }
+    
+    .cart-page main,
+    .cart-page .container {
+        flex: 1 0 auto;
+    }
+    
+    .order-page {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Улучшаем читаемость */
+    p, li, span {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    /* Увеличиваем тач-зоны для кнопок */
+    button, 
+    .btn-primary, 
+    .btn-danger,
+    .add-to-cart-btn,
+    .view-details-btn,
+    .submit-order-btn,
+    .cart-toggle,
+    .filter-btn,
+    .qty-btn,
+    .remove-btn,
+    .quantity-btn {
+        min-height: 44px;
+    }
+    
+    /* Предотвращаем увеличение в iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
+
+    /* ----- ШАПКА (фиксированная и компактная) ----- */
     .site-header {
         position: fixed;
         top: 0;
@@ -30,7 +90,7 @@
         gap: 10px;
     }
     
-    /* Логотип - компактный */
+    /* Логотип */
     .logo {
         flex: 1;
         min-width: 0;
@@ -51,7 +111,7 @@
         font-size: 12px;
     }
     
-    /* Корзина - правая часть */
+    /* Корзина в шапке */
     .cart-header {
         margin-left: auto;
     }
@@ -59,7 +119,6 @@
     .cart-toggle {
         padding: 10px 16px;
         font-size: 14px;
-        min-height: 44px;
     }
     
     .cart-toggle span {
@@ -72,7 +131,7 @@
         font-size: 12px;
     }
     
-    /* НАВИГАЦИЯ - большие кнопки */
+    /* Навигация - большие кнопки */
     nav {
         width: 100%;
         order: 3;
@@ -112,14 +171,8 @@
     nav a i {
         display: none;
     }
-    
-    /* Отступ для фиксированной шапки */
-    main {
-        margin-top: 70px;
-        padding-top: 10px;
-    }
-    
-    /* ГЛАВНАЯ СТРАНИЦА */
+
+    /* ----- ГЛАВНАЯ СТРАНИЦА ----- */
     .hero {
         padding: 30px 20px;
         margin: 20px 0;
@@ -151,8 +204,8 @@
     .feature-card {
         padding: 25px 20px;
     }
-    
-    /* КАТАЛОГ */
+
+    /* ----- КАТАЛОГ ----- */
     .catalog-section {
         padding: 25px 20px;
         margin: 25px 0;
@@ -169,7 +222,7 @@
         font-size: 24px;
     }
     
-    /* Фильтры - горизонтальный скролл */
+    /* Фильтры с горизонтальным скроллом */
     .filters {
         overflow-x: auto;
         padding-bottom: 10px;
@@ -201,7 +254,7 @@
         min-height: 42px;
     }
     
-    /* СЕТКА ТОВАРОВ */
+    /* Сетка товаров */
     .products-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 15px;
@@ -252,97 +305,82 @@
     .view-details-btn {
         font-size: 14px;
         padding: 12px;
-        min-height: 44px;
     }
-    
-    /* ==================== СЕКЦИЯ "О НАШЕЙ АПТЕКЕ" ==================== */
-    /* Делаем контейнер колонкой */
-    #about .catalog-section > div[style*="grid"] {
+
+    /* ----- СЕКЦИЯ "О НАС" ----- */
+    .about-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
         gap: 25px !important;
+        margin-top: 25px !important;
         width: 100% !important;
     }
     
-    /* Текстовая часть: оставляем только заголовок */
-    #about .catalog-section > div[style*="grid"] > div:first-child {
+    /* Плашка преимуществ - сверху, по центру */
+    .about-features-card {
         width: 100% !important;
-        text-align: center !important;
-        order: 1 !important;
-    }
-    
-    /* Показываем только заголовок h2 */
-    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
-        display: block !important;
-        font-size: 24px !important;
-        margin-bottom: 0 !important;
-        color: #333 !important;
-    }
-    
-    /* Скрываем параграфы с текстом */
-    #about .catalog-section > div[style*="grid"] > div:first-child p {
-        display: none !important;
-    }
-    
-    /* Плашка преимуществ - на всю ширину под заголовком */
-    #about .catalog-section > div[style*="grid"] > div:last-child {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 25px 20px !important;
-        order: 2 !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* Стили для самой фиолетовой плашки */
-    #about .catalog-section > div[style*="background: linear-gradient"] {
+        order: -1 !important;
         display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        border-radius: 12px !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        justify-content: center !important;
     }
     
-    /* Заголовок в плашке */
-    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+    .about-features-card .features-content {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 25px 20px !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border-radius: 12px !important;
+    }
+    
+    .about-features-card h3 {
         color: white !important;
         font-size: 22px !important;
         margin-bottom: 20px !important;
     }
     
-    /* Список преимуществ */
-    #about .catalog-section > div[style*="background: linear-gradient"] ul {
-        padding-left: 0 !important;
+    .about-features-card .features-list {
+        display: inline-block !important;
+        text-align: left !important;
         margin: 0 !important;
-        width: 100% !important;
+        padding-left: 0 !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] li {
+    .about-features-card .features-list li {
         color: white !important;
-        margin: 12px 0 !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        margin-bottom: 12px !important;
         font-size: 16px !important;
-        text-align: center !important;
         list-style: none !important;
-        padding: 0 !important;
     }
     
-    /* Иконки в списке */
-    #about .catalog-section > div[style*="background: linear-gradient"] li i {
+    .about-features-card .features-list i {
         margin-right: 10px !important;
         font-size: 18px !important;
     }
     
-    /* ==================== КОРЗИНА ДЛЯ МОБИЛЬНЫХ ==================== */
-    /* Контейнер итоговой суммы */
+    /* Текст - снизу */
+    .about-text-content {
+        width: 100% !important;
+        text-align: center !important;
+        order: 2 !important;
+    }
+    
+    .about-text-content p {
+        font-size: 16px !important;
+        margin-bottom: 18px !important;
+    }
+
+    /* ----- КОРЗИНА ----- */
     .cart-summary {
         min-height: auto !important;
-        padding-bottom: 85px !important; /* Место для кнопок */
+        padding-bottom: 85px !important;
         position: relative !important;
         margin-bottom: 20px !important;
     }
     
-    /* Контейнер для кнопок внизу */
     .summary-buttons {
         position: absolute !important;
         bottom: 20px !important;
@@ -353,7 +391,6 @@
         gap: 12px !important;
     }
     
-    /* Сами кнопки */
     #clear-cart-btn,
     #checkout-btn {
         width: 100% !important;
@@ -368,7 +405,6 @@
         border-radius: 10px !important;
     }
     
-    /* Кнопка оформления заказа - особенный стиль */
     #checkout-btn {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         border: none !important;
@@ -377,7 +413,6 @@
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
     }
     
-    /* Текст "Итого" - делаем крупнее */
     .total-price {
         font-size: 20px !important;
         font-weight: 600 !important;
@@ -389,8 +424,8 @@
         font-size: 24px !important;
         color: #667eea !important;
     }
-    
-    /* СТРАНИЦА ОФОРМЛЕНИЯ ЗАКАЗА */
+
+    /* ----- СТРАНИЦА ОФОРМЛЕНИЯ ----- */
     .order-page {
         margin: 15px auto;
         padding: 0 10px;
@@ -452,7 +487,7 @@
         font-size: 20px;
     }
     
-    /* Форма заказа */
+    /* Форма */
     .form-group {
         margin-bottom: 20px;
     }
@@ -473,8 +508,8 @@
         font-size: 16px;
         min-height: 50px;
     }
-    
-    /* МОДАЛЬНОЕ ОКНО */
+
+    /* ----- МОДАЛЬНОЕ ОКНО ----- */
     .product-modal {
         padding: 10px;
         align-items: flex-start;
@@ -544,6 +579,7 @@
         transition: background 0.3s;
         font-size: 14px;
         color: #666;
+        min-height: 44px;
     }
     
     .tab-btn.active {
@@ -595,8 +631,8 @@
         font-size: 15px;
         min-height: 50px;
     }
-    
-    /* ФУТЕР */
+
+    /* ----- ФУТЕР ----- */
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -606,35 +642,14 @@
     .social-links {
         justify-content: center;
     }
-    
-    /* УВЕДОМЛЕНИЯ */
+
+    /* ----- УВЕДОМЛЕНИЯ ----- */
     .notification {
         left: 10px;
         right: 10px;
         max-width: none;
         min-width: auto;
         top: 10px;
-    }
-    
-    /* Улучшаем читаемость текста */
-    p, li, span {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-    
-    /* Увеличиваем тач-зоны для кнопок */
-    button, 
-    .btn-primary, 
-    .btn-danger,
-    .add-to-cart-btn,
-    .view-details-btn,
-    .submit-order-btn {
-        min-height: 44px;
-    }
-    
-    /* Предотвращаем увеличение в iOS */
-    input, select, textarea {
-        font-size: 16px;
     }
 }
 
@@ -673,6 +688,8 @@
         min-height: 46px;
         width: 100%;
         max-width: 300px;
+        margin: 0 auto;
+        display: block;
     }
     
     .products-grid {
@@ -702,16 +719,21 @@
         font-size: 20px;
     }
     
-    /* Секция "О нашей аптеке" на маленьких экранах */
-    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
-        font-size: 22px !important;
+    /* Секция "О нас" */
+    .about-features-card .features-content {
+        padding: 22px 18px !important;
+        max-width: 100% !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
+    .about-features-card h3 {
         font-size: 20px !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] li {
+    .about-features-card .features-list li {
+        font-size: 15px !important;
+    }
+    
+    .about-text-content p {
         font-size: 15px !important;
     }
     
@@ -787,24 +809,23 @@
         font-size: 22px;
     }
     
-    /* Секция "О нашей аптеке" на очень маленьких экранах */
-    #about .catalog-section {
+    .about-features-card .features-content {
         padding: 20px 15px !important;
     }
     
-    #about .catalog-section > div[style*="grid"] > div:first-child h2 {
-        font-size: 20px !important;
+    .about-features-card h3 {
+        font-size: 19px !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] {
-        padding: 20px 15px !important;
+    .about-features-card .features-list li {
+        font-size: 14px !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] h3 {
-        font-size: 18px !important;
+    .about-features-card .features-list i {
+        font-size: 16px !important;
     }
     
-    #about .catalog-section > div[style*="background: linear-gradient"] li {
+    .about-text-content p {
         font-size: 14px !important;
     }
     
@@ -840,6 +861,7 @@
     .product-modal {
         padding-top: 10px;
         padding-bottom: 10px;
+        align-items: center;
     }
     
     .modal-content {
@@ -859,112 +881,16 @@
         max-height: calc(95vh - 100px);
     }
 }
+
+/* ==================== СКРЫТЫЕ КЛАССЫ ДЛЯ АДАПТАЦИИ ==================== */
 .about-desktop-layout {
     display: none !important;
 }
 
-/* Показываем мобильную версию */
 .about-mobile-layout {
     display: flex !important;
     flex-direction: column !important;
     gap: 25px !important;
     margin-top: 25px !important;
     width: 100% !important;
-}
-@media (max-width: 768px) {
-    .about-content-wrapper {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 25px !important;
-        margin-top: 25px !important;
-        width: 100% !important;
-    }
-    
-    /* Плашка преимуществ - сверху, по центру */
-    .about-features-card {
-        width: 100% !important;
-        order: -1 !important; /* Перемещаем наверх */
-        display: flex !important;
-        justify-content: center !important;
-    }
-    
-    .about-features-card .features-content {
-        width: 100% !important;
-        max-width: 500px !important;
-        margin: 0 auto !important;
-        text-align: center !important;
-        padding: 25px 20px !important;
-    }
-    
-    .about-features-card h3 {
-        font-size: 22px !important;
-        margin-bottom: 18px !important;
-    }
-    
-    .about-features-card .features-list {
-        display: inline-block !important;
-        text-align: left !important;
-    }
-    
-    .about-features-card .features-list li {
-        justify-content: flex-start !important;
-        text-align: left !important;
-        margin-bottom: 12px !important;
-        font-size: 16px !important;
-    }
-    
-    /* Текст - снизу */
-    .about-text-content {
-        width: 100% !important;
-        text-align: center !important;
-        order: 2 !important; /* Перемещаем вниз */
-    }
-    
-    .about-text-content p {
-        font-size: 16px !important;
-        margin-bottom: 18px !important;
-    }
-}
-
-/* Адаптация для маленьких экранов */
-@media (max-width: 480px) {
-    .about-features-card .features-content {
-        padding: 22px 18px !important;
-        max-width: 100% !important;
-    }
-    
-    .about-features-card h3 {
-        font-size: 20px !important;
-    }
-    
-    .about-features-card .features-list li {
-        font-size: 15px !important;
-        margin-bottom: 10px !important;
-    }
-    
-    .about-text-content p {
-        font-size: 15px !important;
-    }
-}
-
-@media (max-width: 375px) {
-    .about-features-card .features-content {
-        padding: 20px 15px !important;
-    }
-    
-    .about-features-card h3 {
-        font-size: 19px !important;
-    }
-    
-    .about-features-card .features-list li {
-        font-size: 14px !important;
-    }
-    
-    .about-features-card .features-list i {
-        font-size: 16px !important;
-    }
-    
-    .about-text-content p {
-        font-size: 14px !important;
-    }
 }

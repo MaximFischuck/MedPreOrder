@@ -1,17 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedPreOrder - Каталог препаратов</title>
+    <title>VitaPrime</title>
+    
+    <!-- Блокировка белой вспышки при темной теме -->
+    <script>
+        // Немедленное применение темы до загрузки страницы
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                
+                // Добавляем инлайн-стили для блокировки белого фона
+                const style = document.createElement('style');
+                style.textContent = `
+                    body {
+                        background: ${savedTheme === 'dark' ? '#1a1a2e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
+                        visibility: visible !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            } catch (e) {
+                console.error('Ошибка применения темы:', e);
+            }
+        })();
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
-    <!-- Шапка -->
-    <header>
+    <!-- Шапка (обновленная) -->
+    <header class="site-header"> <!-- Добавлен класс site-header -->
         <div class="container">
             <div class="header-content">
                 <!-- Логотип -->
@@ -20,24 +43,59 @@
                         <i class="fas fa-prescription-bottle-alt"></i>
                     </div>
                     <div class="logo-text">
-                        <h1>MedPreOrder</h1>
+                        <h1>VitaPrime</h1>
                         <p>Аптека с доставкой</p>
                     </div>
                 </a>
                 
-                <!-- Навигация -->
-                <nav>
-                    <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
-                        <li><a href="catalog.html" class="active"><i class="fas fa-pills"></i> Каталог</a></li>
-                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Корзина</a></li>
+                <!-- Мобильное меню (бургер) -->
+                <button class="mobile-menu-toggle" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Навигация (обновленная структура) -->
+                <nav class="main-nav"> <!-- Изменен класс -->
+                    <ul class="nav-menu"> <!-- Добавлен класс -->
+                        <li class="nav-item"> <!-- Добавлен класс -->
+                            <a href="index.html" class="nav-link"> <!-- Изменен класс -->
+                                <i class="fas fa-home"></i>
+                                <span>Главная</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="catalog.html" class="nav-link active"> <!-- Изменен класс -->
+                                <i class="fas fa-pills"></i>
+                                <span>Каталог</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#about" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>О нас</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#delivery" class="nav-link">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Доставка</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#contacts" class="nav-link">
+                                <i class="fas fa-address-book"></i>
+                                <span>Контакты</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 
-                <!-- Счетчик корзины -->
-                <div class="cart-header">
-                    <button class="cart-toggle" onclick="window.location.href='cart.html'">
+                <!-- Корзина (обновленная) -->
+                <div class="cart-wrapper"> <!-- Изменен класс -->
+                    <button class="cart-button" onclick="window.location.href='cart.html'"> <!-- Изменен класс -->
                         <i class="fas fa-shopping-cart"></i>
+                        <span>Корзина</span>
                         <span id="cart-count" class="cart-count">0</span>
                     </button>
                 </div>
@@ -45,7 +103,7 @@
         </div>
     </header>
 
-    <!-- Основной контент -->
+    <!-- Основной контент (без изменений) -->
     <main class="container">
         <section class="catalog-section">
             <div class="section-header">
@@ -72,7 +130,7 @@
         </section>
     </main>
 
-    <!-- Подвал -->
+    <!-- Подвал (без изменений) -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -111,16 +169,9 @@
         </div>
     </footer>
 
-    <!-- Подключаем общий JS -->
-  <script src="data.js"></script>
-    <script src="script.js?"></script>
+    <!-- Подключаем скрипты -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
     
-    <script>
-        // Инициализация каталога при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница каталога загружена');
-            // Ничего не вызываем здесь - всё делает initializePage() в script.js
-        });
-    </script>
 </body>
 </html>

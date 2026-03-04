@@ -3,50 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedPreOrder - Аптека с доставкой</title>
+    <title>VitaPrime</title>
+    
+    <!-- Блокировка белой вспышки при темной теме -->
+    <script>
+        // Немедленное применение темы до загрузки страницы
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                
+                // Добавляем инлайн-стили для блокировки белого фона
+                const style = document.createElement('style');
+                style.textContent = `
+                    body {
+                        background: ${savedTheme === 'dark' ? '#1a1a2e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
+                        visibility: visible !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            } catch (e) {
+                console.error('Ошибка применения темы:', e);
+            }
+        })();
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="mobile.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
-    <!-- Шапка -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <!-- Логотип -->
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-prescription-bottle-alt"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>MedPreOrder</h1>
-                        <p>Аптека с доставкой</p>
-                    </div>
-                </a>
-                
-                <!-- Навигация -->
-                <nav>
-                    <ul>
-                        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Главная</a></li>
-                        <li><a href="catalog.html"><i class="fas fa-pills"></i> Каталог</a></li>
-                        <li><a href="#about"><i class="fas fa-info-circle"></i> О нас</a></li>
-                        <li><a href="#delivery"><i class="fas fa-shipping-fast"></i> Доставка</a></li>
-                        <li><a href="#contacts"><i class="fas fa-address-book"></i> Контакты</a></li>
-                    </ul>
-                </nav>
-                
-                <!-- Корзина -->
-                <div class="cart-header">
-                    <button class="cart-toggle" onclick="window.location.href='cart.html'">
-                        <i class="fas fa-shopping-cart"></i>
-                        Корзина
-                        <span id="cart-count" class="cart-count">0</span>
-                    </button>
+   <!-- Шапка -->
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <!-- Логотип -->
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-prescription-bottle-alt"></i>
                 </div>
+                <div class="logo-text">
+                    <h1>VitaPrime</h1>
+                    <p>Аптека с доставкой</p>
+                </div>
+            </a>
+            
+            <!-- Мобильное меню (бургер) -->
+            <button class="mobile-menu-toggle" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Навигация -->
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Главная</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link">
+                            <i class="fas fa-pills"></i>
+                            <span>Каталог</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>О нас</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#delivery" class="nav-link">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Доставка</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacts" class="nav-link">
+                            <i class="fas fa-address-book"></i>
+                            <span>Контакты</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Корзина -->
+            <div class="cart-wrapper">
+                <button class="cart-button" onclick="window.location.href='cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Корзина</span>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- Основной контент -->
     <main class="container">
@@ -251,12 +306,7 @@
                 <div class="footer-section">
                     <h3>MedPreOrder</h3>
                     <p>Ваше здоровье — наша забота. Современная аптека с доставкой по всему городу.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    
                 </div>
                 
                 <div class="footer-section">
@@ -286,9 +336,6 @@
                     <ul>
                         <li><a href="catalog.html">Каталог товаров</a></li>
                         <li><a href="#delivery">Условия доставки</a></li>
-                        <li><a href="#about">О компании</a></li>
-                        <li><a href="#">Консультация фармацевта</a></li>
-                        <li><a href="#">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
             </div>
