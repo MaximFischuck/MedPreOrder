@@ -1,197 +1,276 @@
 /* ============================================================
-    VitaPrime - ПОЛНЫЙ MOBILE CSS (Версия 2.0)
+   VitaPrime - MOBILE CSS 4.0 (UX Edition)
+   Удобство + современный минимализм
    ============================================================ */
 
 @media (max-width: 768px) {
-    /* ----- 1. ОСНОВНЫЕ НАСТРОЙКИ ----- */
+
+    /* ---------------- 1. БАЗА ---------------- */
+
     body {
         font-size: 15px;
         overflow-x: hidden;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        background: var(--bg-secondary) !important; /* Упрощаем фон для мобильных */
+        padding-bottom: 80px; /* место под нижнюю панель */
+    }
+
+    body.menu-open {
+        overflow: hidden !important;
     }
 
     .container {
-        width: 100%;
         padding: 0 16px;
     }
 
     main {
-        margin-top: 70px; /* Отступ под фиксированную шапку */
-        flex: 1 0 auto;
+        margin-top: 70px;
     }
 
-    /* ----- 2. ШАПКА (Header) ----- */
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1.2rem; }
+    p  { font-size: 0.95rem; line-height: 1.6; }
+
+
+    /* ---------------- 2. HEADER ---------------- */
+
     .site-header {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        z-index: 1000;
-        background: var(--bg-secondary);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        top: 0; left: 0; right: 0;
+        height: 64px;
+        z-index: 2000;
+        backdrop-filter: blur(12px);
+        background: rgba(255,255,255,0.85);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
         display: flex;
         align-items: center;
     }
 
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+    body.dark-theme .site-header {
+        background: rgba(20,20,20,0.85);
     }
 
     .logo-text p {
-        display: none; /* Скрываем подзаголовок на малых экранах */
+        display: none;
     }
 
-    .logo-text h1 {
-        font-size: 1.2rem;
-    }
 
-    /* ----- 3. МОБИЛЬНАЯ НАВИГАЦИЯ ----- */
+    /* ---------------- 3. BURGER MENU ---------------- */
+
     .main-nav {
         position: fixed;
         top: 0;
-        right: -100%; /* Полностью скрыто справа */
+        right: -100%;
         width: 280px;
         height: 100vh;
         background: var(--bg-card);
-        padding: 80px 24px 24px;
+        padding: 80px 25px;
         display: flex;
         flex-direction: column;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1001;
-        box-shadow: -10px 0 20px rgba(0,0,0,0.1);
+        transition: right 0.35s ease;
+        z-index: 3000;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
     }
 
-    /* Когда через JS добавляем класс .active */
     .main-nav.active {
         right: 0;
     }
 
     .main-nav ul {
         flex-direction: column;
-        gap: 15px;
+        gap: 18px;
     }
 
     .main-nav ul li a {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        padding: 8px 0;
         display: block;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
-    /* Затемнение фона при открытом меню */
     .menu-overlay {
         position: fixed;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(2px);
+        background: rgba(0,0,0,0.55);
         display: none;
-        z-index: 1000;
+        z-index: 2500;
     }
 
     .menu-overlay.active {
         display: block;
     }
 
-    /* Кнопка-бургер */
-    .mobile-menu-toggle {
+
+    /* ---------------- 4. ФИЛЬТР КАТАЛОГА ---------------- */
+
+    .catalog-layout {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        width: 24px;
-        height: 18px;
-        background: transparent;
-        border: none;
-        padding: 0;
-        z-index: 1100;
     }
 
-    .mobile-menu-toggle span {
+    .filters-sidebar {
         width: 100%;
-        height: 2px;
-        background-color: var(--text-primary);
-        transition: all 0.3s ease;
+        background: var(--bg-card);
+        padding: 16px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     }
 
-    /* Анимация бургера в крестик */
-    .mobile-menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
-    .mobile-menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .category-list {
+        display: flex !important;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 8px;
+        scrollbar-width: none;
+    }
 
-    /* ----- 4. КАТАЛОГ И КАРТОЧКИ ----- */
+    .category-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-list li {
+        white-space: nowrap;
+        background: var(--bg-secondary);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(0,0,0,0.08);
+    }
+
+
+    /* ---------------- 5. СЕТКА ТОВАРОВ ---------------- */
+
     .products-grid {
-        grid-template-columns: 1fr; /* Одна колонка на узких телефонах */
+        grid-template-columns: 1fr;
         gap: 16px;
     }
 
     @media (min-width: 480px) {
         .products-grid {
-            grid-template-columns: repeat(2, 1fr); /* Две колонки на широких телефонах */
+            grid-template-columns: 1fr 1fr;
         }
     }
 
+
+    /* ---------------- 6. КАРТОЧКА ТОВАРА ---------------- */
+
     .product-card {
-        padding: 12px;
-        border-radius: 12px;
+        background: var(--bg-card);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        transition: transform 0.2s ease;
+    }
+
+    .product-card:active {
+        transform: scale(0.98);
+    }
+
+    .product-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .product-info {
+        padding: 14px;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 10px;
     }
 
     .product-actions {
+        display: flex;
         flex-direction: column;
         gap: 8px;
     }
 
-    .add-to-cart-btn, .view-details-btn {
+    .add-to-cart-btn,
+    .view-details-btn {
         width: 100%;
         padding: 12px;
-        font-size: 0.9rem;
+        border-radius: 12px;
+        font-weight: 600;
+        justify-content: center;
+        transition: all 0.2s ease;
     }
 
-    /* ----- 5. КОРЗИНА И ОФОРМЛЕНИЕ ----- */
+    .add-to-cart-btn:active,
+    .view-details-btn:active {
+        transform: scale(0.96);
+    }
+
+
+    /* ---------------- 7. КОРЗИНА ---------------- */
+
     .cart-item {
-        grid-template-columns: 70px 1fr;
-        grid-template-areas: 
-            "image info"
-            "image price"
-            "controls total"
-            "remove remove";
-        padding: 12px;
-        gap: 8px;
+        grid-template-columns: 80px 1fr;
+        padding: 14px;
+        border-radius: 14px;
+        background: var(--bg-card);
+        margin-bottom: 12px;
     }
-
-    .cart-item-image { width: 70px; height: 70px; }
 
     .summary-buttons {
         flex-direction: column;
+        gap: 10px;
     }
 
     .order-container {
-        grid-template-columns: 1fr; /* Форма и чекбокс в одну колонку */
-    }
-
-    /* ----- 6. ФУТЕР ----- */
-    .footer-content {
         grid-template-columns: 1fr;
-        text-align: center;
-        gap: 24px;
     }
 
-    .contact-info li {
-        justify-content: center;
-    }
-}
 
-/* Фиксы для очень маленьких экранов */
-@media (max-width: 360px) {
-    .logo-text h1 { font-size: 1rem; }
-    .section-title { font-size: 1.4rem; }
+    /* ---------------- 8. FIXED BOTTOM NAVIGATION ---------------- */
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: var(--bg-card);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+        z-index: 4000;
+    }
+
+    .bottom-nav a {
+        font-size: 1.3rem;
+        transition: transform 0.2s ease;
+    }
+
+    .bottom-nav a:active {
+        transform: scale(0.9);
+    }
+
+
+    /* ---------------- 9. АНИМАЦИИ ---------------- */
+
+    .product-card {
+        animation: fadeInUp 0.4s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
 }
