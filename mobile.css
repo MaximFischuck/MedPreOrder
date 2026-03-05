@@ -1,90 +1,3 @@
-Hi Claude! I'm new here. Could you vibe code with me? If you need more information from me, ask me 1-2 key questions right away. If you think I should give you more context or upload anything to help you do a better job, let me know.
-
-If it makes sense, create something we can look at together—like a visual, a checklist, or something interactive. Thanks for your help!
-03:57
-
-Hey, welcome! I'd love to vibe code with you. Let me ask a couple of quick questions to get us started:
-
-Also — feel free to describe your idea in as much detail as you want! The more you share (what it does, who it's for, any visual style you have in mind), the better I can make it. ✨
-
-Ты понимаешь русский?
-03:57
-
-Да, конечно! Я отлично понимаю русский язык. 😊
-
-Расскажи, что хочешь создать — и мы начнём вместе!
-
-https://github.com/MaximFischuck/MedPreOrder/tree/mobilefixes
-это мой проект сайта-аптеки "VitaPrime", вопрос чтобы ты мог видеть код тебе достаточной этой ссылки или мне скинуть файлы проекта?
-03:59
-
-Хороший вопрос! К сожалению, я не могу напрямую открыть GitHub-ссылку — у меня нет доступа к интернету в этом режиме.
-
-Чтобы я мог реально помочь с кодом, лучше всего:
-
-И пока отвечаешь — расскажи коротко: что конкретно хочешь улучшить или добавить в VitaPrime? Это поможет понять, какие именно файлы нам понадобятся. 🙂
-
-Q: Как тебе удобнее поделиться кодом?
-A: Скину нужные файлы вручную
-03:59
-
-Отлично, жду файлы! 📁
-
-Скинь те файлы, которые относятся к тому, что хочешь улучшить или доделать. И заодно расскажи — что именно нужно сделать? Например:
-
-    Починить баг
-    Улучшить дизайн / мобильную версию
-    Добавить новую фичу
-    Что-то другое
-
-Задача следующая:  нужен удобный дизайн именно для мобильной версии
-04:00
-
-Отлично, файлы получил! Дай прочитаю все файлы чтобы понять полную картину проекта.
-Ran 2 commands
-
-Отлично, теперь у меня есть полная картина! Сейчас изучу skill для фронтенда и сделаю крутой мобильный дизайн.
-Reading frontend design skill
-
-Теперь создам полностью переработанный mobile.css — чистый, современный, с характером:
-Created a file, read a file
-
-Готово! Вот что изменилось в новом mobile.css:
-
-Шрифты — заменил на DM Sans (заголовки, кнопки) + Nunito (текст). Сразу другой характер.
-
-Хедер — стеклянный эффект (backdrop-filter), логотип компактнее, кнопка корзины без лишнего текста.
-
-Бургер меню — теперь аккуратная квадратная кнопка с иконкой, drawer открывается справа с блюром фона.
-
-Фильтры каталога — горизонтальный скролл с pill-кнопками, активный фильтр с градиентом.
-
-Карточки товаров — 2 колонки, компактные, с анимацией появления со stagger-эффектом. Цена зелёная и жирная.
-
-Корзина — каждый товар как минималистичная карточка с фото + все элементы управления в одну строку.
-
-Модальное окно — теперь выезжает снизу как bottom sheet (как в мобильных приложениях), с drag handle.
-
-Уведомления — растягиваются на всю ширину под хедером вместо маленького угла.
-
-Нижняя навигация — bottom-nav получил иконки + подписи + активное состояние.
-
-Просто замени старый mobile.css на этот файл — остальные файлы трогать не нужно.
-Mobile
-Code · CSS 
-Want to be notified when Claude responds?
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-Mobile · CSS
-/* ============================================================
-   VitaPrime — MOBILE CSS 5.0
-   Aesthetic: "Clean Clinic" — crisp whites, confident greens,
-   surgical precision with warm humanist touches.
-   Font: DM Sans (display) + Nunito (body) via Google Fonts
-   ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Nunito:wght@400;500;600;700&display=swap');
 
 /* ── CUSTOM PROPERTIES (MOBILE OVERRIDES) ──────────────────── */
 @media (max-width: 768px) {
@@ -234,6 +147,12 @@ Mobile · CSS
   /* ══════════════════════════════════════════════════════════
      BURGER TOGGLE
   ══════════════════════════════════════════════════════════ */
+  /* ── HIDE desktop nav, show burger ── */
+  .main-nav {
+    /* hide the inline desktop nav until drawer opens */
+    display: none;
+  }
+
   .mobile-menu-toggle {
     display: flex !important;
     width: 36px;
@@ -249,6 +168,7 @@ Mobile · CSS
     cursor: pointer;
     box-shadow: var(--mob-shadow);
     transition: var(--transition);
+    flex-shrink: 0;
   }
 
   .mobile-menu-toggle span {
@@ -273,21 +193,24 @@ Mobile · CSS
      SLIDE-IN NAV DRAWER
   ══════════════════════════════════════════════════════════ */
   .main-nav {
-    position: fixed;
-    top: 0; right: -100%;
-    width: min(300px, 85vw);
-    height: 100dvh;
-    background: var(--mob-card);
-    z-index: 3500;
-    padding: 90px 24px 40px;
-    transition: right 0.32s cubic-bezier(.4,0,.2,1);
-    box-shadow: -8px 0 40px rgba(26,32,53,0.18);
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    left: auto !important;
+    width: min(300px, 85vw) !important;
+    height: 100dvh !important;
+    background: var(--mob-card) !important;
+    z-index: 3500 !important;
+    padding: 90px 24px 40px !important;
+    transition: right 0.32s cubic-bezier(.4,0,.2,1) !important;
+    box-shadow: -8px 0 40px rgba(26,32,53,0.18) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    flex: none !important;
   }
 
-  .main-nav.active { right: 0; }
+  .main-nav.active { right: 0 !important; }
 
   .nav-menu {
     flex-direction: column;
@@ -1226,4 +1149,64 @@ Mobile · CSS
 
 } /* end @media 768px */
 
-Vibe code with me - Claude
+
+/* ============================================================
+   CATALOG HEADER FIX — compact title + horizontal filter scroll
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Compact section header */
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding-bottom: 14px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .section-title {
+    font-size: 1.15rem !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .section-title i {
+    font-size: 1rem !important;
+  }
+
+  /* Filters: force horizontal scroll — override any vertical layout */
+  .filters {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 2px 0 8px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .filters::-webkit-scrollbar { display: none !important; }
+
+  .filter-btn {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    padding: 7px 15px !important;
+    font-size: 0.8rem !important;
+    border-radius: 30px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Catalog section wrapper — remove heavy card background */
+  .catalog-section {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+}
