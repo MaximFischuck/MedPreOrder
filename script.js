@@ -335,16 +335,17 @@ function updateProductCatalog() {
     const productsGrid = document.getElementById('products-grid');
     if (!productsGrid) return;
     
-    // Определяем активный фильтр
-    let activeFilter = 'all';
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.classList.contains('active')) {
-            // Пробуем получить категорию из data-атрибута или из onclick
-            const category = btn.getAttribute('data-category') || 
-                            (btn.onclick ? btn.onclick.toString().match(/filterProducts\('([^']+)'\)/)?.[1] : null);
-            if (category) activeFilter = category;
-        }
-    });
+    // Определяем активный фильтр (приоритет — глобальная переменная, затем DOM)
+    let activeFilter = window._activeFilter || 'all';
+    if (!window._activeFilter) {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            if (btn.classList.contains('active')) {
+                const onclickStr = btn.getAttribute('onclick') || '';
+                const match = onclickStr.match(/filterProducts\('([^']+)'\)/);
+                if (match) activeFilter = match[1];
+            }
+        });
+    }
     
     // Фильтруем товары
     let filteredProducts = products;
@@ -402,13 +403,15 @@ function updateProductCatalog() {
 function filterProducts(category) {
     console.log('Фильтрация по категории:', category);
     
-    // Обновляем активную кнопку
+    // Сохраняем текущий фильтр глобально — updateProductCatalog его читает
+    window._activeFilter = category;
+
+    // Обновляем активную кнопку: ищем по onclick-строке (надёжнее всего)
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
-        // Проверяем data-атрибут или текст кнопки
-        const btnCategory = btn.getAttribute('data-category') || 
-                           btn.textContent.trim().toLowerCase();
-        if (btnCategory === category || btnCategory === category.toLowerCase()) {
+        const onclickStr = btn.getAttribute('onclick') || '';
+        const match = onclickStr.match(/filterProducts\('([^']+)'\)/);
+        if (match && match[1] === category) {
             btn.classList.add('active');
         }
     });
@@ -892,26 +895,35 @@ function initMobileMenu() {
     const body = document.body;
     
     if (menuToggle && mainNav) {
-        // Создаем оверлей, если его нет
-        let overlay = document.querySelector('.menu-overlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'menu-overlay';
-            body.appendChild(overlay);
+        // Убираем все старые overlay и создаём один свежий
+        document.querySelectorAll('.menu-overlay').forEach(el => el.remove());
+        const overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        body.appendChild(overlay);
+
+        function openMenu() {
+            menuToggle.classList.add('active');
+            mainNav.classList.add('active');
+            overlay.classList.add('active');
+            body.style.overflow = 'hidden';
         }
-        
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mainNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-            body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
-        });
-        
-        overlay.addEventListener('click', function() {
+
+        function closeMenu() {
             menuToggle.classList.remove('active');
             mainNav.classList.remove('active');
-            this.classList.remove('active');
+            overlay.classList.remove('active');
             body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.contains('active') ? closeMenu() : openMenu();
+        });
+        
+        overlay.addEventListener('click', closeMenu);
+
+        // Закрываем меню при клике на любую ссылку внутри
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
     }
     
@@ -919,11 +931,7 @@ function initMobileMenu() {
     const header = document.querySelector('.site-header');
     if (header) {
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
     }
 }

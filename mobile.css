@@ -1,3 +1,11 @@
+/* ============================================================
+   VitaPrime — MOBILE CSS 5.0
+   Aesthetic: "Clean Clinic" — crisp whites, confident greens,
+   surgical precision with warm humanist touches.
+   Font: DM Sans (display) + Nunito (body) via Google Fonts
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Nunito:wght@400;500;600;700&display=swap');
 
 /* ── CUSTOM PROPERTIES (MOBILE OVERRIDES) ──────────────────── */
 @media (max-width: 768px) {
@@ -1207,6 +1215,48 @@
     box-shadow: none !important;
     padding: 0 !important;
     border-radius: 0 !important;
+  }
+
+}
+
+
+/* ============================================================
+   Z-INDEX & OVERLAY FIX — menu drawer always on top
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Overlay должен быть ПОД drawer, не поверх него */
+  .menu-overlay {
+    z-index: 3000 !important;
+    pointer-events: auto !important;
+    /* blur только фон страницы, не сам drawer */
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+  }
+
+  /* Drawer всегда поверх overlay */
+  .main-nav {
+    z-index: 3500 !important;
+    pointer-events: auto !important;
+    /* Снимаем любой filter/blur с самого drawer */
+    filter: none !important;
+    -webkit-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    opacity: 1 !important;
+  }
+
+  .main-nav * {
+    pointer-events: auto !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Burger кнопка поверх overlay */
+  .mobile-menu-toggle {
+    z-index: 4000 !important;
+    pointer-events: auto !important;
   }
 
 }
