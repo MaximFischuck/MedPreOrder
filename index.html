@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedPreOrder - Аптека с доставкой</title>
+    <title>VitaPrime</title>
+    
+    <!-- Блокировка белой вспышки при темной теме -->
+    <script>
+        // Немедленное применение темы до загрузки страницы
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                
+                // Добавляем инлайн-стили для блокировки белого фона
+                const style = document.createElement('style');
+                style.textContent = `
+                    body {
+                        background: ${savedTheme === 'dark' ? '#1a1a2e' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
+                        visibility: visible !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            } catch (e) {
+                console.error('Ошибка применения темы:', e);
+            }
+        })();
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="mobile.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
    <!-- Шапка -->
@@ -20,7 +43,7 @@
                     <i class="fas fa-prescription-bottle-alt"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>MedPreOrder</h1>
+                    <h1>VitaPrime</h1>
                     <p>Аптека с доставкой</p>
                 </div>
             </a>
@@ -150,7 +173,7 @@
     
     <div class="about-content-wrapper">
         <div class="about-text-content">
-            <p><strong>MedPreOrder</strong> — это современная интернет-аптека, которая объединяет традиционные ценности фармацевтики и передовые технологии. Мы работаем на рынке с 2010 года и за это время заслужили доверие тысяч клиентов.</p>
+            <p><strong>VitaPrime</strong> — это современная интернет-аптека, которая объединяет традиционные ценности фармацевтики и передовые технологии. Мы работаем на рынке с 2010 года и за это время заслужили доверие тысяч клиентов.</p>
             <p>Наш ассортимент включает более 5000 наименований лекарственных препаратов, медицинских изделий, витаминов и средств личной гигиены. Все товары хранятся в надлежащих условиях, что гарантирует их качество и эффективность.</p>
         </div>
         
@@ -281,7 +304,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>MedPreOrder</h3>
+                    <h3>VitaPrime</h3>
                     <p>Ваше здоровье — наша забота. Современная аптека с доставкой по всему городу.</p>
                     
                 </div>
@@ -295,7 +318,7 @@
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>info@medpreorder.ru</span>
+                            <span>info@VitaPrime.ru</span>
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
@@ -318,7 +341,7 @@
             </div>
             
             <div class="copyright">
-                <p>© 2026 MedPreOrder. Все права защищены. Лицензия № ЛО-77-01-012345 от 12.01.2023</p>
+                <p>© 2026 VitaPrime. Все права защищены. Лицензия № ЛО-77-01-012345 от 12.01.2023</p>
             </div>
         </div>
     </footer>
