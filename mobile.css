@@ -1260,3 +1260,47 @@
   }
 
 }
+
+
+/* ============================================================
+   FINAL FIXES: скрыть бургер + правильный отступ под хедером
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* 1. Полностью скрываем бургер и всё связанное с ним */
+  .mobile-menu-toggle,
+  .menu-overlay {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  /* 2. Хедер — фиксированный, высота 62px */
+  .site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 62px !important;
+    z-index: 2000 !important;
+  }
+
+  /* 3. main — отступ сверху строго равен высоте хедера + небольшой зазор */
+  main,
+  main.container {
+    margin-top: 74px !important;
+    padding-top: 0 !important;
+  }
+
+  /* 4. Если body имеет padding-top — сбрасываем (на случай конфликта) */
+  body {
+    padding-top: 0 !important;
+  }
+
+  /* 5. hero и первая секция — не должны уезжать под хедер */
+  .hero,
+  .features,
+  .catalog-section:first-of-type {
+    margin-top: 0 !important;
+  }
+
+}
